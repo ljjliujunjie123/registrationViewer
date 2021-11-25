@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include<stdio.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,4 +13,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+int hello(){
+    std::cout<<"Hello"<<std::endl;
+}
+
 
