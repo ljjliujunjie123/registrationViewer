@@ -11,3 +11,15 @@ bool CheckboxControl::isChecked() const {
 void CheckboxControl::setChecked(bool checked) {
     _checked = checked;
 }
+
+void CheckboxControl::setValueChangedListener(function<void(bool)> l) {
+    onValueChangeListener = l;
+}
+
+CheckboxControl::CheckboxControl(const string &name, const string &desc, bool isChecked): BaseControl(name, desc){
+    _checked = isChecked;
+    _type = CHECKBOX;
+}
+
+
+

@@ -18,6 +18,8 @@ aux_source_directory(. TOP_LEVEL)
 aux_source_directory(./Nodes NODES_SRC)
 aux_source_directory(./Controls CONTROLS_SRC)
 aux_source_directory(./Utils UTILS_SRC)
+add_subdirectory(Controls)
+#add_subdirectory(Nodes)
 #message(NOTICE "Included Files:" ${NODES_SRC})
 add_executable(registrationViewer main.cpp ${TOP_LEVEL} ${NODES_SRC} ${CONTROLS_SRC} ${UTILS_SRC})
 target_link_libraries(registrationViewer

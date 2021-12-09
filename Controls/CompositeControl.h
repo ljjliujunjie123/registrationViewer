@@ -5,21 +5,22 @@
 #ifndef REGISTRATIONVIEWER_COMPOSITECONTROL_H
 #define REGISTRATIONVIEWER_COMPOSITECONTROL_H
 
-#include "AbsControl.h"
-#include "AbsSingleWidgetControl.h"
+#include "BaseControl.h"
+#include "BaseControl.h"
 #include "../Utils/exceptions.cpp"
 #include<list>
 #include<optional>
 
-class CompositeControl: public AbsControl {
+class CompositeControl: public BaseControl {
 public:
-    list<AbsSingleWidgetControl>::const_iterator getSubControlList();
-    void insertControl(AbsSingleWidgetControl control);
-    const AbsSingleWidgetControl& findControlByName(const string& name);
+    CompositeControl(const string& name, const string& desc, list<BaseControl> initialList);
+    list<BaseControl>::const_iterator getSubControlList();
+    void insertControl(BaseControl control);
+    const BaseControl& findControlByName(const string& name);
 
 
 private:
-    list<AbsSingleWidgetControl> subControls;
+    list<BaseControl> subControls;
 
 };
 

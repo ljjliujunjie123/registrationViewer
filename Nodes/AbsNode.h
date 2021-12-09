@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#include "../Controls/AbsControl.h"
+#include "../Controls/BaseControl.h"
 
 enum IO_TYPE {IO_FILEPATH, IO_ANTSIMAGE, IO_ITKIMAGE};
 
@@ -18,7 +18,7 @@ class AbsNode
 public:
     AbsNode();
     virtual const string& getDisplayName() const;
-    list<AbsControl>::const_iterator getControls(){
+    list<BaseControl>::const_iterator getControls() const{
         return controls.cbegin();
     }
     virtual bool isIOTypeSupported(IO_TYPE type);
@@ -27,8 +27,9 @@ public:
 
     //0-100 progress
     void addProgressListener(function<void(int)> l);
+    void registerUpdateListener(function<void(void)> l);
 private:
-    list<AbsControl> controls;
+    list<BaseControl> controls;
     function<void(void)> startListener = [this](){
         cout<<getDisplayName()<<"started"<<endl;
     };
@@ -39,8 +40,7 @@ private:
     function<void(int)> progressListener = [this](int progress){
         cout<<getDisplayName()+": progress "<<progress<<endl;
     };
-
-
+    function<void(void)> updateListener;
 
 };
 

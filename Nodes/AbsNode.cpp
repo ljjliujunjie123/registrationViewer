@@ -4,3 +4,18 @@
 
 #include "AbsNode.h"
 
+void AbsNode::addStartListener(function<void(void)> l) {
+    startListener = l;
+}
+
+void AbsNode::addFinishListener(function<void(void)> l) {
+    finishListener = l;
+}
+
+void AbsNode::addProgressListener(function<void(int)> l) {
+    progressListener = l;
+}
+
+void AbsNode::registerUpdateListener(function<void(void)> l) {
+    updateListener = l;
+}

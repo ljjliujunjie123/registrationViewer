@@ -27,3 +27,17 @@ void SpinBoxControl<T>::setValue(T val) {
     value = val;
 }
 
+template<typename numberType>
+void SpinBoxControl<numberType>::setValueChangedListener(function<void(numberType)> l) {
+    onValueChangeListener = l;
+}
+
+template<typename numberType>
+SpinBoxControl<numberType>::SpinBoxControl(const string &name, const string &desc, pair<numberType, numberType> initRange): BaseControl(name, desc) {
+    range = initRange;
+    value = initRange.first;
+    _type = SPIN_BOX;
+}
+
+
+

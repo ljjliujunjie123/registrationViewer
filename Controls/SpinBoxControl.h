@@ -4,20 +4,24 @@
 
 #ifndef REGISTRATIONVIEWER_SPINBOXCONTROL_H
 #define REGISTRATIONVIEWER_SPINBOXCONTROL_H
-#include "AbsSingleWidgetControl.h"
+#include "BaseControl.h"
 #include<utility>
 
-template<typename T>
-class SpinBoxControl: public AbsSingleWidgetControl{
+template<typename numberType>
+class SpinBoxControl: public BaseControl{
 public:
-    void setRange(T min, T max);
-    const pair<T, T>& getRange() const;
+    SpinBoxControl(const string& name, const string& desc,pair<numberType, numberType> initRange);
+    void setRange(numberType min, numberType max);
+    const pair<numberType, numberType>& getRange() const;
 
-    void setValue(T val);
-    const T& getValue() const;
+    void setValue(numberType val);
+    const numberType& getValue() const;
+    void setValueChangedListener(function<void(numberType)> l );
+
 
 private:
-    pair<T, T> range = make_pair(0.0,1.0);
+    pair<numberType, numberType> range = make_pair(0.0, 1.0);
+    function<void(numberType)> onValueChangeListener;
     int value = range.first;
 };
 

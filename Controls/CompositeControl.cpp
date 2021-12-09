@@ -4,15 +4,12 @@
 
 #include "CompositeControl.h"
 
-list<AbsSingleWidgetControl>::const_iterator CompositeControl::getSubControlList() {
-    return subControls.cbegin();
-}
 
-void CompositeControl::insertControl(AbsSingleWidgetControl control) {
+void CompositeControl::insertControl(BaseControl control) {
     subControls.insert(subControls.end(), control);
 }
 
-const AbsSingleWidgetControl& CompositeControl::findControlByName(const string &name) {
+const BaseControl& CompositeControl::findControlByName(const string &name) {
     auto it = subControls.cbegin();
     while(it!=subControls.cend()){
         if (it->getDisplayName() == name) return *it;
@@ -20,3 +17,13 @@ const AbsSingleWidgetControl& CompositeControl::findControlByName(const string &
     }
     throw NotFoundException();
 }
+
+list<BaseControl>::const_iterator CompositeControl::getSubControlList() {
+    return subControls.cbegin();
+}
+
+CompositeControl::CompositeControl(const string &name, const string &desc, list<BaseControl> initialList): BaseControl(name, desc) {
+    subControls = move(initialList);
+    _type = COMPOSITE;
+}
+
