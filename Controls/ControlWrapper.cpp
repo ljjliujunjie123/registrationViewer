@@ -37,12 +37,12 @@ ControlWrapper::ControlWrapper(SliderControl &control) {
 
 ControlWrapper::ControlWrapper(SpinBoxControl<int> &control) {
     _spinBoxControlI = &control;
-    _type = SPIN_BOX;
+    _type = SPIN_BOX_I;
 }
 
 ControlWrapper::ControlWrapper(SpinBoxControl<float> &control) {
     _spinBoxControlF = &control;
-    _type = SPIN_BOX;
+    _type = SPIN_BOX_F;
 }
 
 CONTROL_TYPE ControlWrapper::getType() const {

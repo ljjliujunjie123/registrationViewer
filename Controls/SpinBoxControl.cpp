@@ -36,7 +36,8 @@ template<typename numberType>
 SpinBoxControl<numberType>::SpinBoxControl(const string &name, const string &desc, pair<numberType, numberType> initRange): BaseControl(name, desc) {
     range = initRange;
     value = initRange.first;
-    _type = SPIN_BOX;
+    if(is_same<numberType, int>::value) _type = SPIN_BOX_I;
+    else if(is_same<numberType, float>::value) _type = SPIN_BOX_F;
 }
 
 
