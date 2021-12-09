@@ -7,7 +7,7 @@
 
 #include "AbsControl.h"
 
-enum CONTROL_WIDGETS{SLIDER, TEXT_FIELD, DROP_DOWN, BUTTON, CHECKBOX, ADD_BUTTON};
+enum CONTROL_WIDGETS{SLIDER, TEXT_FIELD, COMBO_BOX, BUTTON, CHECKBOX, ADD_BUTTON, SBIN_BOX};
 class AbsSingleWidgetControl: public AbsControl {
 public:
     const CONTROL_WIDGETS& getControlType() const

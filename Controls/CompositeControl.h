@@ -17,6 +17,7 @@ public:
     void insertControl(AbsSingleWidgetControl control);
     const AbsSingleWidgetControl& findControlByName(const string& name);
 
+
 private:
     list<AbsSingleWidgetControl> subControls;
 
