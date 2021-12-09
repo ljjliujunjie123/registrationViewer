@@ -15,8 +15,5 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-int hello(){
-    std::cout<<"Hello"<<std::endl;
-}
 
 

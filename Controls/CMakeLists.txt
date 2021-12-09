@@ -1,2 +1,7 @@
+include_directories(../Utils)
 aux_source_directory(. CONTROL_SRCS)
+list(REMOVE_ITEM CONTROL_SRCS ./test.cpp)
+message("Removed executable file from CONTROL_SRCS")
+message(${CONTROL_SRCS})
 add_executable(test.cpp ${CONTROL_SRCS})
+add_library(controls ${CONTROL_SRCS})

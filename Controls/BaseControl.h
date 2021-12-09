@@ -6,6 +6,7 @@
 #define REGISTRATIONVIEWER_BASECONTROL_H
 
 #include<string>
+#include<functional>
 
 using namespace std;
 
