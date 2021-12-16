@@ -9,6 +9,7 @@
 using namespace std;
 
 #include "../Controls/BaseControl.h"
+#include "../Controls/ControlWrapper.h"
 
 enum IO_TYPE {IO_FILEPATH, IO_ANTSIMAGE, IO_ITKIMAGE};
 
@@ -16,10 +17,10 @@ enum IO_TYPE {IO_FILEPATH, IO_ANTSIMAGE, IO_ITKIMAGE};
 class AbsNode
 {
 public:
-    AbsNode();
+    AbsNode(const string& name, const string& desc="");
     virtual const string& getDisplayName() const;
-    list<BaseControl>::const_iterator getControls() const{
-        return controls.cbegin();
+    const list<ControlWrapper>& getControls() const{
+        return controls;
     }
     virtual bool isIOTypeSupported(IO_TYPE type);
     void addStartListener(function<void(void)> l);
@@ -29,7 +30,8 @@ public:
     void addProgressListener(function<void(int)> l);
     void registerUpdateListener(function<void(void)> l);
 private:
-    list<BaseControl> controls;
+    string displayName;
+    list<ControlWrapper> controls;
     function<void(void)> startListener = [this](){
         cout<<getDisplayName()<<"started"<<endl;
     };

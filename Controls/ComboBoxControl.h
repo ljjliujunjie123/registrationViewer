@@ -12,7 +12,7 @@ class ComboBoxControl final: public BaseControl{
 public:
 
     ComboBoxControl(const string &name, const string& desc, vector<string>&& options, const string& defaultOpt);
-    vector<string>::const_iterator getOptionList() const;
+    const vector<string>& getOptionList() const;
     const string& getDefaultOption() const;
     void setSelected(int index);
     void setValueChangedListener(function<void(string)> l );

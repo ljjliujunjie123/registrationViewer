@@ -18,8 +18,8 @@ const BaseControl& CompositeControl::findControlByName(const string &name) {
     throw NotFoundException();
 }
 
-list<BaseControl>::const_iterator CompositeControl::getSubControlList() {
-    return subControls.cbegin();
+const list<BaseControl>& CompositeControl::getSubControlList() {
+    return subControls;
 }
 
 CompositeControl::CompositeControl(const string &name, const string &desc, list<BaseControl> initialList): BaseControl(name, desc) {

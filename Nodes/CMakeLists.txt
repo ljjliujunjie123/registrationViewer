@@ -1,0 +1,6 @@
+include_directories(../Utils)
+aux_source_directory(. BASE_NODES)
+aux_source_directory(Tests TEST_NODES)
+aux_source_directory(AntsCmdLineNodes ANTS_CMD_NODES)
+message("Building Nodes...")
+add_library(nodes ${BASE_NODES} ${TEST_NODES} ${ANTS_CMD_NODES})

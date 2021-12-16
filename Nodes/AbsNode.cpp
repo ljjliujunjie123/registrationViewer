@@ -19,3 +19,12 @@ void AbsNode::addProgressListener(function<void(int)> l) {
 void AbsNode::registerUpdateListener(function<void(void)> l) {
     updateListener = l;
 }
+
+const string &AbsNode::getDisplayName() const {
+    return displayName;
+}
+
+AbsNode::AbsNode(const string &name, const string &desc) {
+
+}
+

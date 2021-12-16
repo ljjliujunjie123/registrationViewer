@@ -4,8 +4,8 @@
 
 #include "ComboBoxControl.h"
 
-vector<string>::const_iterator ComboBoxControl::getOptionList() const {
-    return optionList.cbegin();
+const vector<string>& ComboBoxControl::getOptionList() const {
+    return optionList;
 }
 
 const string &ComboBoxControl::getDefaultOption() const {

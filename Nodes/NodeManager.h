@@ -8,14 +8,25 @@
 #include "NodeWrapper.h"
 
 class NodeManager {
+    //Singleton impl:
+private:
+    NodeManager()= default;
+    ~NodeManager()= default;
+    NodeManager(const NodeManager&);
+    NodeManager& operator=(const NodeManager&);
 public:
-    void registerNode(const NodeWrapper& node);
+    static NodeManager& getInstance(){
+        static NodeManager instance;
+        return instance;
+    }
+    //Actual functions:
+public:
+    void registerNode(NodeWrapper node);
     void unregisterNode(const NodeWrapper& node);
     void findAndUnregisterNode(const string& name);
-    list<NodeWrapper>::const_iterator& getNodes() const;
+    const list<NodeWrapper>& getNodes() const;
 private:
     list<NodeWrapper> nodes;
-
 };
 
 

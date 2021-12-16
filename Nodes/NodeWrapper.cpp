@@ -3,3 +3,17 @@
 //
 
 #include "NodeWrapper.h"
+
+NodeWrapper::NodeWrapper(TestNode& node) {
+    _testNode = &node;
+    _type = TEST;
+    _displayName = node.getDisplayName();
+}
+
+const string &NodeWrapper::getDisplayName() {
+    return _displayName;
+}
+
+NODE_TYPE NodeWrapper::getType() {
+    return _type;
+}

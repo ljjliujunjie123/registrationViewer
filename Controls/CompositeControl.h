@@ -14,7 +14,7 @@
 class CompositeControl: public BaseControl {
 public:
     CompositeControl(const string& name, const string& desc, list<BaseControl> initialList);
-    list<BaseControl>::const_iterator getSubControlList();
+    const list<BaseControl>& getSubControlList();
     void insertControl(BaseControl control);
     const BaseControl& findControlByName(const string& name);
 
