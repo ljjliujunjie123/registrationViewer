@@ -22,6 +22,7 @@ add_subdirectory(Nodes)
 
 aux_source_directory(. TOP_LEVEL)
 aux_source_directory(./Utils UTILS_SRC)
+aux_source_directory(./UI UI_SRCS)
 aux_source_directory(./Controls CONTROLS_SRC)
 
 #message(NOTICE "Included Files:" ${NODES_SRC})
@@ -43,7 +44,7 @@ include_directories(
 list(REMOVE_ITEM CONTROLS_SRC ./Controls/test.cpp)
 message("MAIN: removing test.cpp from controls...")
 message(${CONTROLS_SRC})
-add_executable(registrationViewer main.cpp ${TOP_LEVEL} ${UTILS_SRC} ${CONTROLS_SRC})
+add_executable(registrationViewer main.cpp ${TOP_LEVEL} ${UTILS_SRC} ${CONTROLS_SRC} ${UI_SRCS})
 target_link_libraries(registrationViewer nodes)
 #target_link_libraries(registrationViewer controls)
 target_link_libraries(registrationViewer libvtkInteractionWidgets-9.1.1.dylib)
