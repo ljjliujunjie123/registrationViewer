@@ -11,10 +11,11 @@
 class ComboBoxControl final: public BaseControl{
 public:
 
-    ComboBoxControl(const string &name, const string& desc, vector<string>&& options, const string& defaultOpt);
+    ComboBoxControl(int id, const string &name, const string& desc, vector<string>&& options, const string& defaultOpt, bool enabled=true);
     const vector<string>& getOptionList() const;
     const string& getDefaultOption() const;
     void setSelected(int index);
+    const string& getSelected() const;
     void setValueChangedListener(function<void(string)> l );
 
 private:

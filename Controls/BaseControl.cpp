@@ -8,9 +8,11 @@ const string &BaseControl::getDisplayName() const {
     return displayName;
 }
 
-BaseControl::BaseControl(const string &name, const string& desc) {
+BaseControl::BaseControl(int id, const string &name, const string& desc, bool enabled) {
+    _id = id;
     displayName = name;
     description = desc;
+     _enabled = enabled;
 }
 
 const string &BaseControl::getDescription() const {

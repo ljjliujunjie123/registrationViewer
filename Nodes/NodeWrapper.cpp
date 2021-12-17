@@ -10,10 +10,10 @@ NodeWrapper::NodeWrapper(TestNode& node) {
     _displayName = node.getDisplayName();
 }
 
-const string &NodeWrapper::getDisplayName() {
+const string & NodeWrapper::getDisplayName() const {
     return _displayName;
 }
 
-NODE_TYPE NodeWrapper::getType() {
+NODE_TYPE NodeWrapper::getType() const {
     return _type;
 }

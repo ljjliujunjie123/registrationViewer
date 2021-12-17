@@ -5,22 +5,21 @@
 #ifndef REGISTRATIONVIEWER_COMPOSITECONTROL_H
 #define REGISTRATIONVIEWER_COMPOSITECONTROL_H
 
-#include "BaseControl.h"
-#include "BaseControl.h"
-#include "../Utils/exceptions.cpp"
+
+#include "SingleControlWrapper.h"
 #include<list>
 #include<optional>
 
 class CompositeControl: public BaseControl {
 public:
-    CompositeControl(const string& name, const string& desc, list<BaseControl> initialList);
-    const list<BaseControl>& getSubControlList();
-    void insertControl(BaseControl control);
-    const BaseControl& findControlByName(const string& name);
+    CompositeControl(int id, const string& name, const string& desc, list<SingleControlWrapper> initialList, bool enabled = true);
+    const list<SingleControlWrapper> & getSubControlList() const;
+    void insertControl(SingleControlWrapper& control);
+    const SingleControlWrapper& findControlByName(const string& name);
 
 
 private:
-    list<BaseControl> subControls;
+    list<SingleControlWrapper> subControls;
 
 };
 

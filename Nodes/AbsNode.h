@@ -22,14 +22,14 @@ public:
     const list<ControlWrapper>& getControls() const{
         return controls;
     }
-    virtual bool isIOTypeSupported(IO_TYPE type);
     void addStartListener(function<void(void)> l);
     void addFinishListener(function<void(void)> l);
 
     //0-100 progress
     void addProgressListener(function<void(int)> l);
     void registerUpdateListener(function<void(void)> l);
-private:
+
+protected:
     string displayName;
     list<ControlWrapper> controls;
     function<void(void)> startListener = [this](){

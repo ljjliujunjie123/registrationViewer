@@ -10,13 +10,35 @@
 template<typename numberType>
 class SpinBoxControl: public BaseControl{
 public:
-    SpinBoxControl(const string& name, const string& desc,pair<numberType, numberType> initRange);
-    void setRange(numberType min, numberType max);
-    const pair<numberType, numberType>& getRange() const;
+    SpinBoxControl(int id, const string& name, const string& desc,pair<numberType, numberType> initRange, bool enabled = true): BaseControl(id, name, desc, enabled) {
+        range = initRange;
+        value = initRange.first;
+        if(is_same<numberType, int>::value) _type = SPIN_BOX_I;
+        else if(is_same<numberType, float>::value) _type = SPIN_BOX_F;
+    }
 
-    void setValue(numberType val);
-    const numberType& getValue() const;
-    void setValueChangedListener(function<void(numberType)> l );
+    void setRange(numberType min, numberType max) {
+        if(max > min){
+            range.first = min;
+            range.second = max;
+        }
+    }
+
+    const pair<numberType, numberType>& getRange() const {
+        return range;
+    }
+
+    void setValue(numberType val) {
+        value = val;
+    }
+
+    numberType getValue() const {
+        return value;
+    }
+
+    void setValueChangedListener(function<void(numberType)> l) {
+        onValueChangeListener = l;
+    }
 
 
 private:
@@ -24,7 +46,6 @@ private:
     function<void(numberType)> onValueChangeListener;
     int value = range.first;
 };
-
 
 
 

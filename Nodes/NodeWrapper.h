@@ -16,8 +16,8 @@ enum NODE_TYPE{ TEST,
 };
 class NodeWrapper {
 public:
-    NODE_TYPE getType();
-    const string& getDisplayName();
+    NODE_TYPE getType() const;
+    const string & getDisplayName() const;
 
     NodeWrapper(TestNode& node);
 private:

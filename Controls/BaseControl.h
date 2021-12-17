@@ -7,6 +7,8 @@
 
 #include<string>
 #include<functional>
+#include<iostream>
+#include "../Utils/exceptions.h"
 
 using namespace std;
 
@@ -14,7 +16,7 @@ enum CONTROL_TYPE{SLIDER, DIR_FIELD, COMBO_BOX, BUTTON, CHECKBOX, SPIN_BOX_I, SP
 class BaseControl{
 public:
     BaseControl();
-    BaseControl(const string& name, const string& desc);
+    BaseControl(int id, const string& name, const string& desc, bool enabled = true);
     virtual CONTROL_TYPE getControlType() const{
          return _type;
     };
@@ -25,8 +27,12 @@ public:
     }
     const string& getDescription() const;
     void setDescription(const string& desc);
+    int getId() const{
+        return _id;
+    }
 
 protected:
+    int _id = 0;
     bool _enabled = true;
     string displayName;
     string description;

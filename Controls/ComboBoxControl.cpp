@@ -16,14 +16,19 @@ void ComboBoxControl::setSelected(int index) {
     currentSelected = optionList[index];
 }
 
-ComboBoxControl::ComboBoxControl(const string &name, const string &desc, vector<string>&& options, const string& defaultOpt): BaseControl(name, desc) {
+ComboBoxControl::ComboBoxControl(int id, const string &name, const string &desc, vector<string>&& options, const string& defaultOpt, bool enabled): BaseControl(id, name, desc, enabled) {
     optionList = options;
     defaultOption = defaultOpt;
+    currentSelected = defaultOpt;
     _type = COMBO_BOX;
 }
 
 void ComboBoxControl::setValueChangedListener(function<void(string)> l) {
     onValueChangeListener = l;
+}
+
+const string &ComboBoxControl::getSelected() const {
+    return currentSelected;
 }
 
 

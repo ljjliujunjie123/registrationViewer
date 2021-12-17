@@ -4,8 +4,15 @@
 #include<iostream>
 #include<string>
 
+#include "test.cpp"
+
+
+using namespace std;
+
+
 int main(int argc, char *argv[])
 {
+    testEntry();
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
@@ -15,4 +22,5 @@ int main(int argc, char *argv[])
 int hello(){
     std::cout<<"Hello"<<std::endl;
 }
+
 

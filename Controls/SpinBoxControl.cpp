@@ -4,41 +4,21 @@
 
 #include "SpinBoxControl.h"
 
-template<typename T>
-void SpinBoxControl<T>::setRange(T min, T max) {
-    if(max > min){
-        range.first = min;
-        range.second = max;
-    }
-}
 
-template<typename T>
-const pair<T, T> &SpinBoxControl<T>::getRange() const {
-    return range;
-}
+//template<> const pair<int, int> &SpinBoxControl<int>::getRange() const;
+//template<> const pair<float, float> &SpinBoxControl<float>::getRange() const;
 
-template<typename T>
-const T &SpinBoxControl<T>::getValue() const {
-    return value;
-}
+//template<> int &SpinBoxControl<int>::getValue() const;
+//template<> float &SpinBoxControl<float>::getValue() const;
 
-template<typename T>
-void SpinBoxControl<T>::setValue(T val) {
-    value = val;
-}
+//template<> void SpinBoxControl<int>::setValue(int val);
+//template<> void SpinBoxControl<float>::setValue(float val);
 
-template<typename numberType>
-void SpinBoxControl<numberType>::setValueChangedListener(function<void(numberType)> l) {
-    onValueChangeListener = l;
-}
+//template<> void SpinBoxControl<int>::setValueChangedListener(function<void(int)> l);
+//template<> void SpinBoxControl<float>::setValueChangedListener(function<void(float)> l);
 
-template<typename numberType>
-SpinBoxControl<numberType>::SpinBoxControl(const string &name, const string &desc, pair<numberType, numberType> initRange): BaseControl(name, desc) {
-    range = initRange;
-    value = initRange.first;
-    if(is_same<numberType, int>::value) _type = SPIN_BOX_I;
-    else if(is_same<numberType, float>::value) _type = SPIN_BOX_F;
-}
+//template<> SpinBoxControl<int>::SpinBoxControl(int id, const string &name, const string &desc, pair<int, int> initRange, bool enabled);
+//template<> SpinBoxControl<float>::SpinBoxControl(int id, const string &name, const string &desc, pair<float, float> initRange, bool enabled);
 
 
 

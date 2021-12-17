@@ -1,18 +1,9 @@
 //
-// Created by ZZY on 2021/11/30.
+// Created by ZZY on 2021/12/17.
 //
 
-#include<exception>
+#include "exceptions.h"
 
-class NotFoundException: std::exception{
-#ifdef __clang__
-    const char *what() const _NOEXCEPT override {
-        return "The requested item cannot be found";
-    }
-#endif
-#ifdef _WIN32
-    const char *what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW override {
-        return "The requested item cannot be found";
-    }
-#endif
-};
+void checkNull(void *ptr) {
+    if(ptr == nullptr) throw std::runtime_error("NullPtr retrieving from ControlWrapper");
+}

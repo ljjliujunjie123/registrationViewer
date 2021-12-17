@@ -27,7 +27,7 @@ void SliderControl::setValueChangedListener(function<void(int)> l) {
     onValueChangeListener = l;
 }
 
-SliderControl::SliderControl(const string &name, const string &desc, pair<int, int> initRange): BaseControl(name, desc){
+SliderControl::SliderControl(int id, const string &name, const string &desc, pair<int, int> initRange, bool enabled): BaseControl(id, name, desc, enabled){
     setRange(initRange.first, initRange.second);
     value = range.first;
     _type = SLIDER;
