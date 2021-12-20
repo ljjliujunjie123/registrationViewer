@@ -3,13 +3,16 @@
 //
 
 #include "Tests/TestNode.h"
+#include "Tests/execution.h"
 
 
 void testTestNodeArgs();
 
 
 int main(){
-    testTestNodeArgs();
+//    testTestNodeArgs();
+    TestNode n("test");
+    executeTestNode(n,100);
 }
 
 void testTestNodeArgs(){

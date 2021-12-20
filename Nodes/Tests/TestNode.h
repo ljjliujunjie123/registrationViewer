@@ -8,7 +8,9 @@
 #include<map>
 
 class TestNode: public AbsNode {
+
 public:
+
     TestNode(const string& name, const string& desc="");
     string generateArgs() const;
 
