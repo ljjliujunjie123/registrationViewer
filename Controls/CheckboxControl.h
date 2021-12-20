@@ -8,7 +8,7 @@
 
 class CheckboxControl: public BaseControl {
 public:
-    CheckboxControl(const string &name, const string &desc, bool isChecked);
+    CheckboxControl(int id, const string &name, const string &desc, bool isChecked, bool enabled = true);
     bool isChecked() const;
     void setChecked(bool checked);
     void setValueChangedListener(function<void(bool)> l );

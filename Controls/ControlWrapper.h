@@ -4,45 +4,22 @@
 
 #ifndef REGISTRATIONVIEWER_CONTROLWRAPPER_H
 #define REGISTRATIONVIEWER_CONTROLWRAPPER_H
-#include "BaseControl.h"
-#include "ButtonControl.h"
-#include "CheckboxControl.h"
-#include "ComboBoxControl.h"
+#include "SingleControlWrapper.h"
 #include "CompositeControl.h"
-#include "DirectoryFieldControl.h"
-#include "SliderControl.h"
-#include "SpinBoxControl.h"
 
-class ControlWrapper {
+class ControlWrapper: public SingleControlWrapper{
 public:
-    ControlWrapper(ButtonControl& control);
-    ControlWrapper(CheckboxControl& control);
-    ControlWrapper(ComboBoxControl& control);
-    ControlWrapper(CompositeControl& control);
-    ControlWrapper(DirectoryFieldControl& control);
-    ControlWrapper(SliderControl& control);
-    ControlWrapper(SpinBoxControl<int>& control);
-    ControlWrapper(SpinBoxControl<float>& control);
-    CONTROL_TYPE getType() const;
-    const ButtonControl& getButtonControl() const;
-    const CheckboxControl& getCheckboxControl() const;
-    const ComboBoxControl& getComboBoxControl() const;
+    ControlWrapper(ButtonControl control): SingleControlWrapper(move(control)){};
+    ControlWrapper(CheckboxControl control): SingleControlWrapper(move(control)){};
+    ControlWrapper(ComboBoxControl control): SingleControlWrapper(move(control)){};
+    ControlWrapper(CompositeControl control);
+    ControlWrapper(DirectoryFieldControl control): SingleControlWrapper(move(control)){};
+    ControlWrapper(SliderControl control): SingleControlWrapper(move(control)){};
+    ControlWrapper(SpinBoxControl<int> control): SingleControlWrapper(move(control)){};
+    ControlWrapper(SpinBoxControl<float> control): SingleControlWrapper(move(control)){};
     const CompositeControl& getCompositeControl() const;
-    const DirectoryFieldControl& getDirectoryFieldControl() const;
-    const SliderControl& getSliderControl() const;
-    template<typename numberType>
-    const SpinBoxControl<numberType>& getSpinBoxControl() const;
 private:
-    CONTROL_TYPE _type;
-    ButtonControl* _buttonControl = nullptr;
-    CheckboxControl* _checkBoxControl = nullptr;
-    ComboBoxControl* _comboBoxControl = nullptr;
     CompositeControl* _compositeControl = nullptr;
-    DirectoryFieldControl* _directoryFieldControl = nullptr;
-    SliderControl* _sliderControl = nullptr;
-    SpinBoxControl<int>* _spinBoxControlI = nullptr;
-    SpinBoxControl<float>* _spinBoxControlF = nullptr;
-
 };
 
 

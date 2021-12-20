@@ -8,16 +8,17 @@
 #include "BaseControl.h"
 
 enum ICON {
-    ADD, MINUS, ME, HOME, CLOSE, SEARCH
+    IC_ADD, IC_MINUS, IC_ME, IC_HOME, IC_CLOSE, IC_SEARCH
 };
 
 class ButtonControl : public BaseControl {
 public:
-    ButtonControl(const string &name, const string &desc, ICON ic, bool showLabel) : BaseControl(name, desc),
+    ButtonControl(int id, const string &name, const string &desc, ICON ic, bool showLabel, bool enabled = true) : BaseControl(id, name, desc, enabled),
                                                                                      icon(ic),
                                                                                      labelShow(showLabel) {
         _type = BUTTON;
     };
+
     void setOnClickListener(function<void(void)> l );
     const ICON getIconEnum() const ;
     const bool isShowLabel() const ;

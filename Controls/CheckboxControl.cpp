@@ -16,7 +16,7 @@ void CheckboxControl::setValueChangedListener(function<void(bool)> l) {
     onValueChangeListener = l;
 }
 
-CheckboxControl::CheckboxControl(const string &name, const string &desc, bool isChecked): BaseControl(name, desc){
+CheckboxControl::CheckboxControl(int id, const string &name, const string &desc, bool isChecked, bool enabled): BaseControl(id, name, desc, enabled){
     _checked = isChecked;
     _type = CHECKBOX;
 }

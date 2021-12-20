@@ -8,7 +8,7 @@
 
 class DirectoryFieldControl: public BaseControl {
 public:
-    DirectoryFieldControl(const string &name, const string& desc): BaseControl(name, desc){
+    DirectoryFieldControl(int id, const string &name, const string& desc, bool enabled = true): BaseControl(id, name, desc, enabled){
         _type = DIR_FIELD;
     };
     const string& getDir() const;
