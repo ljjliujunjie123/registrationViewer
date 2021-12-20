@@ -20,6 +20,10 @@ public:
     const string & getDisplayName() const;
 
     NodeWrapper(TestNode& node);
+
+    TestNode *getNode() {
+        return _testNode;
+    };
 private:
     NODE_TYPE _type;
     string _displayName;

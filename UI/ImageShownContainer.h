@@ -7,6 +7,14 @@
 
 #include <QFrame>
 #include <QSize>
+#include <vtkActor.h>
+#include <vtkCamera.h>
+#include <vtkNew.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkProperty.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkRenderer.h>
 
 class ImageShownContainer: public QFrame {
 

@@ -11,6 +11,13 @@
 #include "../Nodes/NodeManager.h"
 #include "../Nodes/NodeWrapper.h"
 #include "../Nodes/AbsNode.h"
+#include "../Controls/BaseControl.h"
+#include "../Controls/ButtonControl.h"
+#include <QSlider>
+#include <QComboBox>
+#include <QSpinBox>
+#include <QPushButton>
+#include <QCheckBox>
 
 class ProcessNodesContainer: public QFrame {
 
@@ -19,17 +26,19 @@ public:
 
 protected:
     virtual void resizeEvent(QResizeEvent *event);
-
 private:
     QScrollArea* nodesScrollArea;
     QFrame* nodesScrollContainer;
+    QHBoxLayout* spacerHLayout;
     QVBoxLayout* nodesScrollLayout;
 
-    NodeManager* nodeManger;
+    NodeManager& nodeManger = NodeManager::getInstance();
 
     void parseNodeList();
 
-    QFrame& createNodeFactory(AbsNode *node);
+    QString getIconFilePath(ICON icon);
+
+    QFrame* createNodeFactory(AbsNode *node);
 };
 
 

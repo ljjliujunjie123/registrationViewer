@@ -13,8 +13,8 @@ private:
     NodeManager()= default;
     ~NodeManager()= default;
     NodeManager(const NodeManager&);
-    NodeManager& operator=(const NodeManager&);
 public:
+    NodeManager& operator=(const NodeManager&);
     static NodeManager& getInstance(){
         static NodeManager instance;
         return instance;
@@ -24,7 +24,9 @@ public:
     void registerNode(NodeWrapper node);
     void unregisterNode(const NodeWrapper& node);
     void findAndUnregisterNode(const string& name);
-    const list<NodeWrapper>& getNodes() const;
+    const list<NodeWrapper>& getNodes() const {
+        return nodes;
+    };
 private:
     list<NodeWrapper> nodes;
 };
