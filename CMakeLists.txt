@@ -28,15 +28,24 @@ aux_source_directory(./Controls CONTROLS_SRC)
 #message(NOTICE "Included Files:" ${NODES_SRC})
 
 #vtk:
-set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
-#set( VTK_DIR "...")
+#set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
+set( VTK_DIR "D:/respository/vtk/src")
 link_directories(${VTK_DIR}/cmake-build-debug/lib)
 include_directories(
         ${VTK_DIR}/Interaction/Widgets
         ${VTK_DIR}/Rendering/Core
         ${VTK_DIR}/cmake-build-debug/Interaction/Widgets/
         ${VTK_DIR}/Common/Core
+        ${VTK_DIR}/Common/Color
+        ${VTK_DIR}/Common/ComputationalGeometry
+        ${VTK_DIR}/Common/DataModel
+        ${VTK_DIR}/Common/ExecutionModel
+        ${VTK_DIR}/Common/Math
+        ${VTK_DIR}/Common/Misc
+        ${VTK_DIR}/Common/System
+        ${VTK_DIR}/Common/Transforms
         ${VTK_DIR}/cmake-build-debug/Common/Core
+        ${VTK_DIR}/cmake-build-debug/Common/ExecutionModel
         ${VTK_DIR}/Utilities/KWIML
         ${VTK_DIR}/cmake-build-debug/Rendering/Core
         ${VTK_DIR}/cmake-build-debug/Filters/Core
@@ -49,7 +58,7 @@ message(${CONTROLS_SRC})
 add_executable(registrationViewer main.cpp ${TOP_LEVEL} ${UTILS_SRC} ${CONTROLS_SRC} ${UI_SRCS})
 target_link_libraries(registrationViewer nodes)
 #target_link_libraries(registrationViewer controls)
-target_link_libraries(registrationViewer libvtkInteractionWidgets-9.1.1.dylib)
+#target_link_libraries(registrationViewer libvtkInteractionWidgets-9.1.1.dylib)
 target_link_libraries(registrationViewer
         Qt5::Core
         Qt5::Gui

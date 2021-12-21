@@ -14,10 +14,13 @@
 #include "../Controls/BaseControl.h"
 #include "../Controls/ButtonControl.h"
 #include <QSlider>
+#include <QLabel>
 #include <QComboBox>
 #include <QSpinBox>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QGraphicsDropShadowEffect>
+#include <QColor>
 
 class ProcessNodesContainer: public QFrame {
 
@@ -39,6 +42,8 @@ private:
     QString getIconFilePath(ICON icon);
 
     QFrame* createNodeFactory(const AbsNode& node);
+
+    QHBoxLayout* createControlLayout(QWidget *control, const QString& text, int height);
 };
 
 

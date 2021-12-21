@@ -29,13 +29,4 @@ private:
     map<string, NodeWrapper> registeredNodes;
 };
 
-void initNodeManager(){
-    NodeManager& inst = NodeManager::getInstance();
-    inst.registerNode(NodeWrapper(TestNode("test node", "test node desc")), "TestNode in List");
-//    auto it = inst.getNodes().cbegin();
-//    while (it != inst.getNodes().cend()){
-//        cout<<it->first<<" "<<it->second.getDisplayName()<<endl;
-//    }
-}
-
 #endif //REGISTRATIONVIEWER_NODEMANAGER_H

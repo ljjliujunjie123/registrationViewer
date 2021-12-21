@@ -2,3 +2,5 @@ cmake-build-debug
 .idea
 registrationViewer.pro.*
 .DS_Store
+vtk
+cmake-build-debug-mingw
