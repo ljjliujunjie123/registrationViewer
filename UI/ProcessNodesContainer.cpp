@@ -83,6 +83,13 @@ QFrame* ProcessNodesContainer::createNodeFactory(AbsNode *node) {
                 pSlider->setRange(range.first, range.second);
                 pSlider->setSingleStep(step); // 步长
                 pSlider->setTickPosition(QSlider::TicksAbove);  //刻度在上方
+                pSlider->setTracking(false);
+                connect(pSlider, &QSlider::valueChanged, this,
+                        [&sliderControl](int curValue) -> void {
+                            sliderControl.setValue(curValue);
+                            cout << sliderControl.getValue() << endl;
+                        }
+                );
                 nodeLayout->addWidget(pSlider);
                 nodeHeight += sH;
                 break;
@@ -95,14 +102,21 @@ QFrame* ProcessNodesContainer::createNodeFactory(AbsNode *node) {
                 auto comboBox = new QComboBox();
                 auto comboBoxControl = control->getComboBoxControl();
                 auto items = comboBoxControl.getOptionList();
-                auto item = items.begin();
-                for (; item!=items.end(); ++item) {
-                    auto text = QString::fromStdString((*item));
+                for (auto & item : items) {
+                    auto text = QString::fromStdString(item);
                     comboBox->addItem(text,"");
                 }
+                comboBox->addItem(QString("heloow"), "");
+                comboBox->addItem(QString("heloow"), "");
                 comboBox->setFixedHeight(mH);
                 comboBox->setCurrentIndex(0);
-                comboBoxControl.setSelected(0);
+                connect(comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,
+                        [&comboBoxControl](int curIndex) -> void {
+//                            to do 这里的control list有bug，运行时大小异常
+//                            comboBoxControl.setSelected(curIndex);
+                            cout << curIndex << endl;
+                        }
+                );
                 nodeLayout->addWidget(comboBox);
                 nodeHeight += mH;
                 break;
@@ -113,6 +127,11 @@ QFrame* ProcessNodesContainer::createNodeFactory(AbsNode *node) {
                 auto iconFilePath = getIconFilePath(buttonControl.getIconEnum());
                 button->setIconSize(QSize(32,32));
                 button->setIcon(QIcon(iconFilePath));
+                connect(button, &QPushButton::clicked, this,
+                        [&buttonControl]() -> void {
+                           cout<< "click button" << endl;
+                        }
+                );
                 nodeLayout->addWidget(button);
                 nodeHeight += 40;
                 break;
@@ -126,6 +145,16 @@ QFrame* ProcessNodesContainer::createNodeFactory(AbsNode *node) {
                 checkBox->setEnabled(true);
                 checkBox->setCheckState(Qt::CheckState::Unchecked);
                 checkBox->setTristate(false);
+                connect(checkBox, &QCheckBox::stateChanged, this,
+                        [&checkBoxControl](int curState) -> void {
+                            if (curState == Qt::CheckState::Checked) {
+                                checkBoxControl.setChecked(true);
+                            } else {
+                                checkBoxControl.setChecked(false);
+                            }
+                            cout<< "check box cur state: " << curState << endl;
+                        }
+                );
                 nodeLayout->addWidget(checkBox);
                 nodeHeight += mH;
                 break;
@@ -140,6 +169,12 @@ QFrame* ProcessNodesContainer::createNodeFactory(AbsNode *node) {
                 spinBox->setRange(range.first, range.second);
                 spinBox->setSingleStep(step);
                 spinBox->setValue(spinBoxControl.getValue());
+                connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+                        [&spinBoxControl](int curValue) -> void {
+                            spinBoxControl.setValue(curValue);
+                            cout<< curValue << endl;
+                        }
+                );
                 nodeLayout->addWidget(spinBox);
                 nodeHeight += mH;
                 break;
@@ -154,6 +189,12 @@ QFrame* ProcessNodesContainer::createNodeFactory(AbsNode *node) {
                 spinBox->setRange(range.first, range.second);
                 spinBox->setSingleStep(step);
                 spinBox->setValue(spinBoxControl.getValue());
+                connect(spinBox, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,
+                        [&spinBoxControl](double curValue) -> void {
+                            spinBoxControl.setValue((float)curValue);
+                            cout<< curValue << endl;
+                        }
+                );
                 nodeLayout->addWidget(spinBox);
                 nodeHeight += mH;
                 break;
