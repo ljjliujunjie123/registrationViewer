@@ -21,13 +21,21 @@ public:
     }
     //Actual functions:
 public:
-    void registerNode(NodeWrapper node);
-    void unregisterNode(const NodeWrapper& node);
+    void registerNode(NodeWrapper node, const string& listItemDisplay);
+    void unregisterNode(const string& listItemDisplay);
     void findAndUnregisterNode(const string& name);
-    const list<NodeWrapper>& getNodes() const;
+    const map<string, NodeWrapper>& getNodes() const;
 private:
-    list<NodeWrapper> nodes;
+    map<string, NodeWrapper> registeredNodes;
 };
 
+void initNodeManager(){
+    NodeManager& inst = NodeManager::getInstance();
+    inst.registerNode(NodeWrapper(TestNode("test node", "test node desc")), "TestNode in List");
+//    auto it = inst.getNodes().cbegin();
+//    while (it != inst.getNodes().cend()){
+//        cout<<it->first<<" "<<it->second.getDisplayName()<<endl;
+//    }
+}
 
 #endif //REGISTRATIONVIEWER_NODEMANAGER_H

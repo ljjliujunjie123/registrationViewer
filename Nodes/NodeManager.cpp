@@ -4,25 +4,30 @@
 
 #include "NodeManager.h"
 
-void NodeManager::registerNode(NodeWrapper node) {
-    auto it = nodes.begin();
-    for(; it != nodes.end(); it++){
-        if(it->getDisplayName() == node.getDisplayName() && node.getType() == it->getType()) {
+void NodeManager::registerNode(NodeWrapper node, const string& itemDisplay) {
+    auto it = registeredNodes.cbegin();
+    for(; it != registeredNodes.cend(); it++){
+        if(it->first == itemDisplay && node.getType() == it->second.getType()) {
             cout<<"duplicated register of Node"<<node.getType()<<", named "<<node.getDisplayName()<<endl;
             return;
         }
     }
-    nodes.insert(it, node);
+    registeredNodes.insert(make_pair(itemDisplay, node));
 }
 
-void NodeManager::unregisterNode(const NodeWrapper &node) {
-    auto it = nodes.begin();
-    for(; it != nodes.end(); it++){
-        if(it->getDisplayName() == node.getDisplayName() && node.getType() == it->getType()) {
-
-            return;
-        }
-    }
-    nodes.insert(it, node);
+void NodeManager::unregisterNode(const string& itemDisplay) {
+    auto it = registeredNodes.find(itemDisplay);
+    if (it != registeredNodes.end())
+        registeredNodes.erase(it);
+    else cout<<"Requested key not found"<<endl;
 }
+
+const map<string, NodeWrapper> &NodeManager::getNodes() const {
+    return registeredNodes;
+}
+
+void NodeManager::findAndUnregisterNode(const string &name) {
+    cout<<"Not implemented"<<endl;
+}
+
 

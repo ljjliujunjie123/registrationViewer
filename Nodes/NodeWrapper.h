@@ -15,15 +15,21 @@ enum NODE_TYPE{ TEST,
         ANTS_TRANFROM_BSPLINESYN
 };
 class NodeWrapper {
+//  Constructors:
+public:
+    NodeWrapper(TestNode node);
+
+
+//  Methods:
 public:
     NODE_TYPE getType() const;
     const string & getDisplayName() const;
-
+    inline bool operator==(const NodeWrapper& rhs);
     NodeWrapper(TestNode& node);
 private:
     NODE_TYPE _type;
     string _displayName;
-    TestNode* _testNode;
+    TestNode* _testNode = nullptr;
 };
 
 
