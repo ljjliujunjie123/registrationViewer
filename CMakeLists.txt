@@ -28,16 +28,18 @@ aux_source_directory(./Controls CONTROLS_SRC)
 #message(NOTICE "Included Files:" ${NODES_SRC})
 
 #vtk:
-link_directories("/Users/zzy/Documents/GitHub/VTK-9.1.0/cmake-build-debug/lib")
+set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
+#set( VTK_DIR "...")
+link_directories(${VTK_DIR}/cmake-build-debug/lib)
 include_directories(
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/Interaction/Widgets
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/Rendering/Core
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/cmake-build-debug/Interaction/Widgets/
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/Common/Core
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/cmake-build-debug/Common/Core
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/Utilities/KWIML
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/cmake-build-debug/Rendering/Core
-        /Users/zzy/Documents/GitHub/VTK-9.1.0/cmake-build-debug/Filters/Core
+        ${VTK_DIR}/Interaction/Widgets
+        ${VTK_DIR}/Rendering/Core
+        ${VTK_DIR}/cmake-build-debug/Interaction/Widgets/
+        ${VTK_DIR}/Common/Core
+        ${VTK_DIR}/cmake-build-debug/Common/Core
+        ${VTK_DIR}/Utilities/KWIML
+        ${VTK_DIR}/cmake-build-debug/Rendering/Core
+        ${VTK_DIR}/cmake-build-debug/Filters/Core
 )
 
 

@@ -31,7 +31,7 @@ public:
     //0-100 progress
     void addProgressListener(function<void(int)> l);
     void registerUpdateListener(function<void(void)> l);
-    void updateProgress(int prog) const
+    void updateProgress(int prog) const;
 
 protected:
     string displayName;

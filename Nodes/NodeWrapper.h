@@ -26,9 +26,14 @@ public:
     const string & getDisplayName() const;
     inline bool operator==(const NodeWrapper& rhs);
     NodeWrapper(TestNode& node);
+    const AbsNode& getBaseNode() const {
+        return baseNode;
+    }
 private:
     NODE_TYPE _type;
     string _displayName;
+    AbsNode baseNode;
+
     TestNode* _testNode = nullptr;
 };
 
