@@ -8,6 +8,7 @@
 #include <QFrame>
 #include "qboxlayout.h"
 #include "qscrollarea.h"
+#include "NPushButtonExtend.h"
 #include "../Nodes/NodeManager.h"
 #include "../Nodes/NodeWrapper.h"
 #include "../Nodes/AbsNode.h"
@@ -32,12 +33,13 @@ protected:
 private:
     QScrollArea* nodesScrollArea;
     QFrame* nodesScrollContainer;
-    QHBoxLayout* spacerHLayout;
+    NPushButtonExtend* nodeMenuButton;
     QVBoxLayout* nodesScrollLayout;
+    QHBoxLayout* nodesMenuLayout;
 
     NodeManager& nodeManger = NodeManager::getInstance();
 
-    void parseNodeList();
+    void parseNodeMenu();
 
     QString getIconFilePath(ICON icon);
 

@@ -8,7 +8,7 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
     setFrameShape(QFrame::StyledPanel);
     setFrameShadow(QFrame::Plain);
     setMaximumWidth(600);
-    setMinimumWidth(300);
+    setMinimumWidth(320);
     nodesScrollArea = new QScrollArea(this);
     nodesScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     nodesScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -17,21 +17,46 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
     nodesScrollContainer = new QFrame(nodesScrollArea);
     nodesScrollArea->setWidget(nodesScrollContainer);
 
-//    spacerHLayout = new QHBoxLayout();
-//    spacerHLayout->setContentsMargins(0,0,0,0);
-//    spacerHLayout->setSpacing(0);
-//    spacerHLayout->addSpacerItem(new QSpacerItem(20, 20, QSizePolicy::Expanding));
-//    spacerHLayout->addWidget(nodesScrollContainer);
-//    spacerHLayout->addSpacerItem(new QSpacerItem(20, 20, QSizePolicy::Expanding));
-//    nodesScrollArea->setLayout(spacerHLayout);
-
     nodesScrollLayout = new QVBoxLayout();
-    nodesScrollLayout->setContentsMargins(20,0,20,0);
+    nodesScrollLayout->setContentsMargins(0,0,0,0);
     nodesScrollLayout->setSpacing(20);
     nodesScrollLayout->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     nodesScrollContainer->setLayout(nodesScrollLayout);
 
-    parseNodeList();
+    int menuHeight = 40;
+    auto nodeMenuLabel = new QLabel(nodesScrollContainer);
+    nodeMenuLabel->setStyleSheet("border: none;");
+    nodeMenuLabel->setText("添加Node:");
+    nodeMenuLabel->setFixedHeight(menuHeight);
+    nodeMenuLabel->adjustSize();
+    nodeMenuLabel->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+
+    nodeMenuButton = new NPushButtonExtend(nodesScrollContainer);
+    nodeMenuButton->SetMenuButton(0);
+    nodeMenuButton->setIcon(QIcon(getIconFilePath(IC_ADD)));
+    nodeMenuButton->setFixedHeight(menuHeight);
+    connect(nodeMenuButton, &NPushButtonExtend::signalMenuClicked, this,
+            [&](QString nodeString) -> void {
+                cout<< nodeString.toStdString() << endl;
+                auto nodeWrapperMap = nodeManger.getNodes();
+                auto nodeWrapper = NodeWrapper(nodeWrapperMap.find(nodeString.toStdString())->second);
+                nodeManger.addShownNode(nodeWrapper,nodeManger.getShownNodes().size());
+                auto node = createNodeFactory(nodeWrapper.getBaseNode());
+                nodesScrollLayout->addWidget(node);
+            }
+    );
+    nodesMenuLayout = new QHBoxLayout();
+    nodesMenuLayout->setContentsMargins(0,0,0,0);
+    nodesMenuLayout->setSpacing(0);
+    nodesMenuLayout->addWidget(nodeMenuLabel);
+    nodesMenuLayout->addSpacing(155);
+    nodesMenuLayout->addWidget(nodeMenuButton);
+    nodesMenuLayout->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+    nodesScrollLayout->addLayout(nodesMenuLayout);
+    nodesScrollContainer->setFixedHeight(menuHeight);
+    parseNodeMenu();
+    nodesScrollContainer->setFixedHeight(nodesScrollContainer->height() + 30);
 }
 
 void ProcessNodesContainer::resizeEvent(QResizeEvent *event) {
@@ -39,12 +64,13 @@ void ProcessNodesContainer::resizeEvent(QResizeEvent *event) {
     nodesScrollContainer->setFixedWidth(width());
 }
 
-void ProcessNodesContainer::parseNodeList() {
+void ProcessNodesContainer::parseNodeMenu() {
     auto nodeWrapperMap = nodeManger.getNodes();
     auto nodeWrapperItem = nodeWrapperMap.cbegin();
     for(; nodeWrapperItem!=nodeWrapperMap.cend(); ++nodeWrapperItem) {
-        auto node = createNodeFactory(nodeWrapperItem->second.getBaseNode());
-        nodesScrollLayout->addWidget(node);
+//        auto node = createNodeFactory(nodeWrapperItem->second.getBaseNode());
+//        nodesScrollLayout->addWidget(node);
+        nodeMenuButton->AddMenuItem(QString::fromStdString(nodeWrapperItem->first), false, true);
     }
 }
 
@@ -64,7 +90,7 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
     );
     nodeContainer->setFrameShape(QFrame::StyledPanel);
     nodeContainer->setFrameShadow(QFrame::Plain);
-    nodeContainer->setFixedWidth(300);
+    nodeContainer->setFixedWidth(320);
     nodeContainer->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 
     auto nodeLayout = new QVBoxLayout();
@@ -229,8 +255,11 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
         }
     }
 
-    nodeContainer->setFixedHeight(nodeHeight + nodeLayout->spacing() * (nodeLayout->count() - 1) + 20);
-    nodesScrollContainer->setFixedHeight(nodesScrollContainer->height() + nodeContainer->height() + nodesScrollLayout->spacing());
+    nodeContainer->setFixedHeight(nodeHeight + nodeLayout->spacing() * (nodeLayout->count() - 1));
+    nodesScrollContainer->setFixedHeight(
+            nodesScrollContainer->height() +
+            nodeContainer->height() +
+            nodesScrollLayout->spacing());
     return nodeContainer;
 }
 
