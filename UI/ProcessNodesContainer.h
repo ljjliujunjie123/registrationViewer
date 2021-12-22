@@ -7,6 +7,7 @@
 
 #include <QFrame>
 #include "qboxlayout.h"
+#include "qformlayout.h"
 #include "qscrollarea.h"
 #include "NPushButtonExtend.h"
 #include "../Nodes/NodeManager.h"
@@ -45,7 +46,7 @@ private:
 
     QFrame* createNodeFactory(const AbsNode& node);
 
-    QHBoxLayout* createControlLayout(QWidget *control, const QString& text, int height);
+    QLabel* createControlName(QWidget *control, const QString& text, int height);
 };
 
 

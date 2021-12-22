@@ -15,7 +15,7 @@ void TestNode::initControls() {
             ControlWrapper(ComboBoxControl(4,"ComboBox", "ComboBox Desc", {"Hello", "World", "Registration"}, "World", true))
     });
     auto initControls = {
-            ControlWrapper(ButtonControl(5,"Button", "Button Description", IC_ADD, true)),
+            ControlWrapper(ButtonControl(5,"Button", "Button Description", IC_MINUS, true)),
             ControlWrapper(CheckboxControl(6,"CheckBox", "CheckBox Desc", false, false)),
             ControlWrapper(ComboBoxControl(7,"ComboBox", "ComboBox Desc", {"Hello", "World", "Registration"}, "World", true)),
             composite,

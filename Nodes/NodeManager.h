@@ -26,12 +26,12 @@ public:
     void findAndUnregisterNode(const string& name);
     const map<string, NodeWrapper>& getNodes() const;
 
-    void addShownNode(const NodeWrapper& node, int index);
+    void addShownNode(const AbsNode& node, int index);
     void removeShownNode(int index);
-    list<NodeWrapper>& getShownNodes();
+    list<AbsNode>& getShownNodes();
 private:
     map<string, NodeWrapper> registeredNodes;
-    list<NodeWrapper> shownNodes;
+    list<AbsNode> shownNodes;
 };
 
 #endif //REGISTRATIONVIEWER_NODEMANAGER_H

@@ -3,6 +3,7 @@
 #include <QApplication>
 #include<iostream>
 #include<string>
+#include <QFile>
 #include "test.cpp"
 #include "Nodes/NodeManager.h"
 
@@ -27,6 +28,15 @@ int main(int argc, char *argv[])
     testEntry();
     initNodeManager();
     QApplication a(argc, argv);
+    QFile qssFile("myQSS.qss");
+    qssFile.open(QFile::ReadOnly);
+
+    if(qssFile.isOpen())
+    {
+        QString qss = QLatin1String(qssFile.readAll());
+        qApp->setStyleSheet(qss);
+        qssFile.close();
+    }
     MainWindow w;
     w.show();
     return a.exec();

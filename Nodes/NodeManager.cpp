@@ -30,11 +30,11 @@ void NodeManager::findAndUnregisterNode(const string &name) {
     cout<<"Not implemented"<<endl;
 }
 
-list<NodeWrapper> &NodeManager::getShownNodes() {
+list<AbsNode> &NodeManager::getShownNodes() {
     return shownNodes;
 }
 
-void NodeManager::addShownNode(const NodeWrapper& node, int index) {
+void NodeManager::addShownNode(const AbsNode& node, int index) {
     auto it = shownNodes.begin();
     advance(it,index);
     shownNodes.insert(it, node);

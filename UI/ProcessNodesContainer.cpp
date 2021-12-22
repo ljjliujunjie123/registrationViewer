@@ -8,7 +8,7 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
     setFrameShape(QFrame::StyledPanel);
     setFrameShadow(QFrame::Plain);
     setMaximumWidth(600);
-    setMinimumWidth(320);
+    setMinimumWidth(400);
     nodesScrollArea = new QScrollArea(this);
     nodesScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     nodesScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -36,11 +36,11 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
     nodeMenuButton->setIcon(QIcon(getIconFilePath(IC_ADD)));
     nodeMenuButton->setFixedHeight(menuHeight);
     connect(nodeMenuButton, &NPushButtonExtend::signalMenuClicked, this,
-            [&](QString nodeString) -> void {
+            [&](const QString& nodeString) -> void {
                 cout<< nodeString.toStdString() << endl;
                 auto nodeWrapperMap = nodeManger.getNodes();
                 auto nodeWrapper = NodeWrapper(nodeWrapperMap.find(nodeString.toStdString())->second);
-                nodeManger.addShownNode(nodeWrapper,nodeManger.getShownNodes().size());
+                nodeManger.addShownNode(nodeWrapper.getBaseNode(),nodeManger.getShownNodes().size());
                 auto node = createNodeFactory(nodeWrapper.getBaseNode());
                 nodesScrollLayout->addWidget(node);
             }
@@ -49,7 +49,7 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
     nodesMenuLayout->setContentsMargins(0,0,0,0);
     nodesMenuLayout->setSpacing(0);
     nodesMenuLayout->addWidget(nodeMenuLabel);
-    nodesMenuLayout->addSpacing(155);
+    nodesMenuLayout->addSpacing(235);
     nodesMenuLayout->addWidget(nodeMenuButton);
     nodesMenuLayout->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
@@ -68,8 +68,6 @@ void ProcessNodesContainer::parseNodeMenu() {
     auto nodeWrapperMap = nodeManger.getNodes();
     auto nodeWrapperItem = nodeWrapperMap.cbegin();
     for(; nodeWrapperItem!=nodeWrapperMap.cend(); ++nodeWrapperItem) {
-//        auto node = createNodeFactory(nodeWrapperItem->second.getBaseNode());
-//        nodesScrollLayout->addWidget(node);
         nodeMenuButton->AddMenuItem(QString::fromStdString(nodeWrapperItem->first), false, true);
     }
 }
@@ -78,7 +76,7 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
 //  定义node GUI
     auto nodeContainer = new QFrame();
     //设置具体阴影
-    QGraphicsDropShadowEffect *shadow_effect = new QGraphicsDropShadowEffect(this);
+    auto *shadow_effect = new QGraphicsDropShadowEffect(this);
     shadow_effect->setOffset(0, 5);
     //阴影颜色
     shadow_effect->setColor(Qt::darkGray);
@@ -90,13 +88,13 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
     );
     nodeContainer->setFrameShape(QFrame::StyledPanel);
     nodeContainer->setFrameShadow(QFrame::Plain);
-    nodeContainer->setFixedWidth(320);
+    nodeContainer->setFixedWidth(400);
     nodeContainer->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 
-    auto nodeLayout = new QVBoxLayout();
+    auto nodeLayout = new QFormLayout();
     nodeLayout->setContentsMargins(10,10,10,10);
     nodeLayout->setSpacing(5);
-    nodeLayout->setAlignment(Qt::AlignCenter);
+    nodeLayout->setAlignment(Qt::AlignVCenter);
     nodeContainer->setLayout(nodeLayout);
 
 //  遍历control list，构建node
@@ -113,12 +111,10 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                 auto sliderControl = control->getSliderControl();
                 auto range = sliderControl.getRange();
                 auto step = (range.second - range.first) / 20;
-                pSlider->setFixedHeight(sH);
-                pSlider->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+                pSlider->setStyleSheet("border: none;");
                 pSlider->setOrientation(Qt::Horizontal);  // 水平方向
                 pSlider->setRange(range.first, range.second);
                 pSlider->setSingleStep(step); // 步长
-                pSlider->setTickPosition(QSlider::TicksAbove);  //刻度在上方
                 pSlider->setTracking(false);
                 connect(pSlider, &QSlider::valueChanged, this,
                         [&sliderControl](int curValue) -> void {
@@ -126,9 +122,9 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                             cout << sliderControl.getValue() << endl;
                         }
                 );
-                nodeLayout->addLayout(createControlLayout(
+                nodeLayout->addRow(createControlName(
                         pSlider, QString::fromStdString(sliderControl.getDisplayName()), mH
-                ));
+                ), pSlider);
                 nodeHeight += sH;
                 break;
             }
@@ -154,9 +150,9 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                             cout << curIndex << endl;
                         }
                 );
-                nodeLayout->addLayout(createControlLayout(
+                nodeLayout->addRow(createControlName(
                         comboBox, QString::fromStdString(comboBoxControl.getDisplayName()), mH
-                ));
+                ), comboBox);
                 nodeHeight += mH;
                 break;
             }
@@ -172,7 +168,9 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                            cout<< "click button" << endl;
                         }
                 );
-                nodeLayout->addWidget(button);
+                nodeLayout->addRow(createControlName(
+                        button, QString::fromStdString(buttonControl.getDisplayName()), mH
+                ), button);
                 nodeHeight += mH;
                 break;
             }
@@ -196,9 +194,9 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                             cout<< "check box cur state: " << curState << endl;
                         }
                 );
-                nodeLayout->addLayout(createControlLayout(
+                nodeLayout->addRow(createControlName(
                         checkBox, QString::fromStdString(checkBoxControl.getDisplayName()), mH
-                ));
+                ), checkBox);
                 nodeHeight += mH;
                 break;
             }
@@ -219,9 +217,9 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                             cout<< curValue << endl;
                         }
                 );
-                nodeLayout->addLayout(createControlLayout(
+                nodeLayout->addRow(createControlName(
                         spinBox, QString::fromStdString(spinBoxControl.getDisplayName()), mH
-                ));
+                ), spinBox);
                 nodeHeight += mH;
                 break;
             }
@@ -242,9 +240,9 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                             cout<< curValue << endl;
                         }
                 );
-                nodeLayout->addLayout(createControlLayout(
+                nodeLayout->addRow(createControlName(
                         spinBox, QString::fromStdString(spinBoxControl.getDisplayName()), mH
-                ));
+                ), spinBox);
                 nodeHeight += mH;
                 break;
             }
@@ -265,24 +263,19 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
 
 QString ProcessNodesContainer::getIconFilePath(ICON icon) {
     switch (icon) {
-        case IC_ADD: return QString::fromStdString("../UI_SRC/add.png");
-        default:return QString::fromStdString("../UI_SRC/add.png");
+        case IC_ADD: return QString::fromStdString("./UI_SRC/add.png");
+        case IC_MINUS: return QString::fromStdString("./UI_SRC/minus.png");
+        default:return QString::fromStdString("./UI_SRC/add.png");
     }
 }
 
-QHBoxLayout *ProcessNodesContainer::createControlLayout(QWidget *control, const QString& text, int height) {
+QLabel *ProcessNodesContainer::createControlName(QWidget *control, const QString &text, int height) {
     auto name = new QLabel();
     name->setStyleSheet("border: none;");
     name->setText(text);
     name->setFixedHeight(height);
     name->adjustSize();
+    name->setMaximumWidth(200);
     name->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-
-    auto controlLayout = new QHBoxLayout();
-    controlLayout->setContentsMargins(0,0,0,0);
-    controlLayout->setSpacing(10);
-    controlLayout->setAlignment(Qt::AlignCenter);
-    controlLayout->addWidget(name);
-    controlLayout->addWidget(control);
-    return controlLayout;
+    return name;
 }
