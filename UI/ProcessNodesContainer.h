@@ -6,6 +6,8 @@
 #define REGISTRATIONVIEWER_PROCESSNODESCONTAINER_H
 
 #include <QFrame>
+#include "qfiledialog.h"
+#include "qlineedit.h"
 #include "qboxlayout.h"
 #include "qformlayout.h"
 #include "qscrollarea.h"
@@ -46,7 +48,7 @@ private:
 
     QFrame* createNodeFactory(const AbsNode& node);
 
-    QLabel* createControlName(QWidget *control, const QString& text, int height);
+    QLabel* createControlName(const QString& text, int height);
 };
 
 

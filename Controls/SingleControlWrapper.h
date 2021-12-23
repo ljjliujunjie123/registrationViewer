@@ -26,13 +26,13 @@ public:
     CONTROL_TYPE getType() const;
     const string& getDisplayName() const;
     int getId() const;
-    const ButtonControl& getButtonControl() const;
-    const CheckboxControl& getCheckboxControl() const;
-    const ComboBoxControl& getComboBoxControl() const;
-    const DirectoryFieldControl& getDirectoryFieldControl() const;
-    const SliderControl& getSliderControl() const;
+    ButtonControl& getButtonControl() ;
+    CheckboxControl& getCheckboxControl() ;
+    ComboBoxControl& getComboBoxControl() ;
+    DirectoryFieldControl& getDirectoryFieldControl() ;
+    SliderControl& getSliderControl() ;
     template<typename numberType>
-    const SpinBoxControl<numberType>& getSpinBoxControl() const;
+    SpinBoxControl<numberType>& getSpinBoxControl() ;
 protected:
     CONTROL_TYPE _type;
     string _displayName;

@@ -25,7 +25,7 @@ public:
     NODE_TYPE getType() const;
     const string & getDisplayName() const;
     inline bool operator==(const NodeWrapper& rhs);
-    const AbsNode& getBaseNode() const {
+    AbsNode& getBaseNode() {
         return baseNode;
     }
 private:

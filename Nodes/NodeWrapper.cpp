@@ -4,7 +4,7 @@
 
 #include "NodeWrapper.h"
 
-NodeWrapper::NodeWrapper(TestNode node): baseNode(static_cast<AbsNode>(node)) {
+NodeWrapper::NodeWrapper(TestNode node): baseNode(static_cast<AbsNode>(*(new TestNode(node)))) {
     _testNode = new TestNode(node);
     _type = TEST;
     _displayName = node.getDisplayName();

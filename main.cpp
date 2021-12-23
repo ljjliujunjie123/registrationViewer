@@ -1,12 +1,10 @@
 #include "mainwindow.h"
-
 #include <QApplication>
 #include<iostream>
 #include<string>
 #include <QFile>
 #include "test.cpp"
 #include "Nodes/NodeManager.h"
-
 
 using namespace std;
 
@@ -27,6 +25,7 @@ int main(int argc, char *argv[])
 {
     testEntry();
     initNodeManager();
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication a(argc, argv);
     QFile qssFile("myQSS.qss");
     qssFile.open(QFile::ReadOnly);

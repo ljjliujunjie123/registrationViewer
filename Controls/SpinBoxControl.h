@@ -44,7 +44,7 @@ public:
 private:
     pair<numberType, numberType> range = make_pair(0.0, 1.0);
     function<void(numberType)> onValueChangeListener;
-    int value = range.first;
+    numberType value = range.first;
 };
 
 

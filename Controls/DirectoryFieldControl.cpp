@@ -8,7 +8,7 @@ const string &DirectoryFieldControl::getDir() const {
     return dir;
 }
 
-void DirectoryFieldControl::setDir(string & d) {
+void DirectoryFieldControl::setDir(string d) {
     dir = d;
 }
 
