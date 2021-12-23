@@ -36,17 +36,5 @@ void AbsNode::updateProgress(int prog) const {
     progressListener(prog);
 }
 
-AbsNode::AbsNode(const AbsNode& node) {
-    displayName = node.displayName;
-    description = node.description;
-    list<ControlWrapper> nc(node.getControls());
-    controls = nc;
-}
-
-AbsNode::AbsNode(const string &name, const string &desc) {
-    displayName = *new string(name);
-    description = *new string(desc);
-}
-
 
 

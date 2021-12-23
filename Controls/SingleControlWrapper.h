@@ -16,7 +16,6 @@
 class SingleControlWrapper {
 public:
     SingleControlWrapper()= default;
-    SingleControlWrapper(const SingleControlWrapper& cw);
     SingleControlWrapper(ButtonControl control);
     SingleControlWrapper(CheckboxControl control);
     SingleControlWrapper(ComboBoxControl control);

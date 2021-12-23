@@ -27,8 +27,4 @@ CompositeControl::CompositeControl(int id, const string &name, const string &des
     _type = COMPOSITE;
 }
 
-CompositeControl::CompositeControl(const CompositeControl& control): BaseControl(static_cast<BaseControl>(control)) {
-    subControls = *new list<SingleControlWrapper>(control.subControls);
-}
-
 

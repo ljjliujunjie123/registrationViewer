@@ -12,7 +12,6 @@
 
 class CompositeControl: public BaseControl {
 public:
-    CompositeControl(const CompositeControl& control);
     CompositeControl(int id, const string& name, const string& desc, list<SingleControlWrapper> initialList, bool enabled = true);
     const list<SingleControlWrapper> & getSubControlList() const;
     void insertControl(SingleControlWrapper& control);

@@ -10,4 +10,3 @@ QSlider::handle:horizontal {
         border-radius: 9px;
 }
 
-,

@@ -9,7 +9,6 @@
 
 class ControlWrapper: public SingleControlWrapper{
 public:
-    ControlWrapper(const ControlWrapper& control);
     ControlWrapper(ButtonControl control): SingleControlWrapper(move(control)){};
     ControlWrapper(CheckboxControl control): SingleControlWrapper(move(control)){};
     ControlWrapper(ComboBoxControl control): SingleControlWrapper(move(control)){};
