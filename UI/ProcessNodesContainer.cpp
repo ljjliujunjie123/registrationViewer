@@ -76,7 +76,7 @@ void ProcessNodesContainer::parseNodeMenu() {
 
 QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
 //  定义node GUI
-    auto nodeContainer = new QFrame();
+    auto& nodeContainer = *new QFrame();
     //设置具体阴影
     auto *shadow_effect = new QGraphicsDropShadowEffect(this);
     shadow_effect->setOffset(0, 5);
@@ -84,18 +84,19 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
     shadow_effect->setColor(Qt::darkGray);
     //阴影半径
     shadow_effect->setBlurRadius(8);
-    nodeContainer->setGraphicsEffect(shadow_effect);
-    nodeContainer->setStyleSheet(
-            "background-color:white;border: 1px solid lightgray;border-radius: 5px;"
+    nodeContainer.setGraphicsEffect(shadow_effect);
+    nodeContainer.setStyleSheet(
+            " #nodeContainer { background-color: white; border: 1px solid lightgray; border-radius: 5px; }"
+            "#nodeContainer > * {border: 1px solid back} "
     );
-    nodeContainer->setFrameShape(QFrame::StyledPanel);
-    nodeContainer->setFrameShadow(QFrame::Plain);
-    nodeContainer->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+    nodeContainer.setFrameShape(QFrame::StyledPanel);
+    nodeContainer.setFrameShadow(QFrame::Plain);
+    nodeContainer.setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
     auto nodeLayout = new QFormLayout();
     nodeLayout->setContentsMargins(10,10,10,10);
     nodeLayout->setSpacing(5);
     nodeLayout->setLabelAlignment(Qt::AlignVCenter | Qt::AlignLeft);
-    nodeContainer->setLayout(nodeLayout);
+    nodeContainer.setLayout(nodeLayout);
 
 //  遍历control list，构建node
     auto controlList = node.getControls();
@@ -204,8 +205,10 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                 connect(button, &QPushButton::clicked, this,
                         [&]() -> void {
 //                         删除当前的node
-//                            nodesScrollLayout->removeWidget(nodeContainer);
-                           cout<< "click button" << endl;
+                            nodeContainer.setParent(nullptr);
+                            nodesScrollLayout->removeWidget(&nodeContainer);
+                            nodesScrollContainer->setFixedHeight(nodesScrollContainer->height() - nodeContainer.height() - nodesScrollLayout->spacing());
+                            cout<< "click button" << endl;
                         }
                 );
                 auto buttonLayout = new QHBoxLayout();
@@ -292,12 +295,12 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                 break;
         }
     }
-    nodeContainer->setFixedHeight(nodeHeight + nodeLayout->spacing() * (nodeLayout->rowCount() - 1) + 20);
+    nodeContainer.setFixedHeight(nodeHeight + nodeLayout->spacing() * (nodeLayout->rowCount() - 1) + 20);
     nodesScrollContainer->setFixedHeight(
             nodesScrollContainer->height() +
-            nodeContainer->height() +
+            nodeContainer.height() +
             nodesScrollLayout->spacing());
-    return nodeContainer;
+    return &nodeContainer;
 }
 
 QString ProcessNodesContainer::getIconFilePath(ICON icon) {
