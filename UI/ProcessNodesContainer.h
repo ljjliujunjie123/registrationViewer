@@ -48,8 +48,9 @@ private:
 
     QFrame* createNodeFactory(const AbsNode& node);
 
-    QLabel* createControlName(const QString& text, int height);
-};
+    QFrame* createCompositeControl(const CompositeControl& compositeControl);
 
+    QLabel* createControlName(const QString& text, int height, int width = 150);
+};
 
 #endif //REGISTRATIONVIEWER_PROCESSNODESCONTAINER_H
