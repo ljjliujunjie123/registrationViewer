@@ -161,7 +161,7 @@ QFrame* ProcessNodesContainer::createNodeFactory(const AbsNode &node) {
                 auto& dirControl = control->getDirectoryFieldControl();
                 auto dirButton = new QPushButton();
                 dirButton->setFixedHeight(mH);
-                dirButton->setIcon(QIcon("../UI_SRC/dir.png"));
+                dirButton->setIcon(QIcon(getIconFilePath(IC_DIR)));
                 auto dirLayout = new QHBoxLayout();
                 dirLayout->setSpacing(10);
                 dirLayout->setContentsMargins(0,0,0,0);
@@ -409,7 +409,7 @@ QFrame *ProcessNodesContainer::createCompositeControl(const CompositeControl &co
                 auto& dirControl = control->getDirectoryFieldControl();
                 auto dirButton = new QPushButton();
                 dirButton->setFixedHeight(mH);
-                dirButton->setIcon(QIcon("../UI_SRC/dir.png"));
+                dirButton->setIcon(QIcon(getIconFilePath(IC_DIR)));
                 auto dirLayout = new QHBoxLayout();
                 dirLayout->setSpacing(10);
                 dirLayout->setContentsMargins(0,0,0,0);
@@ -572,6 +572,8 @@ QString ProcessNodesContainer::getIconFilePath(ICON icon) {
     switch (icon) {
         case IC_ADD: return QString::fromStdString("../UI_SRC/add.png");
         case IC_MINUS: return QString::fromStdString("../UI_SRC/minus.png");
+        case IC_DEL: return QString::fromStdString("../UI_SRC/del.png");
+        case IC_DIR: return QString::fromStdString("../UI_SRC/dir.png");
         default:return QString::fromStdString("../UI_SRC/add.png");
     }
 }
