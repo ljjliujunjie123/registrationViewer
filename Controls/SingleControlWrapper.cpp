@@ -57,27 +57,27 @@ CONTROL_TYPE SingleControlWrapper::getType() const {
     return _type;
 }
 
-const ButtonControl& SingleControlWrapper::getButtonControl() const {
+ButtonControl& SingleControlWrapper::getButtonControl() {
     checkNull(_buttonControl);
     return *_buttonControl;
 }
 
-const CheckboxControl &SingleControlWrapper::getCheckboxControl() const {
+CheckboxControl &SingleControlWrapper::getCheckboxControl() {
     checkNull(_checkBoxControl);
     return *_checkBoxControl;
 }
 
-const ComboBoxControl &SingleControlWrapper::getComboBoxControl() const {
+ComboBoxControl &SingleControlWrapper::getComboBoxControl() {
     checkNull(_comboBoxControl);
     return *_comboBoxControl;
 }
 
-const DirectoryFieldControl &SingleControlWrapper::getDirectoryFieldControl() const {
+DirectoryFieldControl &SingleControlWrapper::getDirectoryFieldControl() {
     checkNull(_directoryFieldControl);
     return *_directoryFieldControl;
 }
 
-const SliderControl &SingleControlWrapper::getSliderControl() const {
+SliderControl &SingleControlWrapper::getSliderControl() {
     checkNull(_sliderControl);
     return *_sliderControl;
 }
@@ -90,12 +90,12 @@ int SingleControlWrapper::getId() const {
     return _id;
 }
 
-template<> const SpinBoxControl<float> &SingleControlWrapper::getSpinBoxControl() const {
+template<> SpinBoxControl<float> &SingleControlWrapper::getSpinBoxControl() {
     checkNull(_spinBoxControlF);
     return *_spinBoxControlF;
 }
 
-template<> const SpinBoxControl<int> &SingleControlWrapper::getSpinBoxControl() const {
+template<> SpinBoxControl<int> &SingleControlWrapper::getSpinBoxControl() {
     checkNull(_spinBoxControlI);
     return *_spinBoxControlI;
 }

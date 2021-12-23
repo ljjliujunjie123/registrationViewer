@@ -10,9 +10,9 @@ void testTestNodeArgs();
 
 
 int main(){
-//    testTestNodeArgs();
-    TestNode n("test");
-    executeTestNode(n,100);
+    testTestNodeArgs();
+//    TestNode n("test");
+//    executeTestNode(n,100);
 }
 
 void testTestNodeArgs(){

@@ -29,7 +29,7 @@ void TestNode::initControls() {
 
 string TestNode::generateArgs() const {
     string call = "";
-    for (const auto & control : controls){
+    for (auto control : controls){
         switch(control.getId()){
             case 1: generateCmdLineComposite(control.getCompositeControl(), call); break;
             case 6: call += (string(" -checked ") + (control.getCheckboxControl().isChecked()? "true" : "false")); break;
@@ -45,7 +45,7 @@ string TestNode::generateArgs() const {
 
 void TestNode::generateCmdLineComposite(const CompositeControl &control, string &s) const {
     s += " -composite [";
-    for( const auto& it: control.getSubControlList()){
+    for(auto it: control.getSubControlList()){
         switch(it.getId()){
             case 2: s += (" sliderVal=" + to_string(it.getSliderControl().getValue())); break;
             case 3: s += (string(", checked=") + (it.getCheckboxControl().isChecked()? "true" : "false")); break;

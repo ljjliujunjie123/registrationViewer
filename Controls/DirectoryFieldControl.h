@@ -12,7 +12,7 @@ public:
         _type = DIR_FIELD;
     };
     const string& getDir() const;
-    void setDir(string& dir);
+    void setDir(string dir);
     void setValueChangedListener(function<void(string)> l );
 
 
