@@ -15,3 +15,7 @@ ControlWrapper::ControlWrapper(CompositeControl control) {
     _displayName = control.getDisplayName();
     _id = control.getId();
 }
+
+ControlWrapper::ControlWrapper(const ControlWrapper& cw) {
+    if(cw.getType() == COMPOSITE) _compositeControl = new CompositeControl(cw.getCompositeControl());
+}

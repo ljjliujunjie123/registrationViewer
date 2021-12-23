@@ -19,7 +19,9 @@ constexpr bool _NODE_PROGRESS_OUT = true;
 class AbsNode
 {
 public:
-    AbsNode(string  name, string  desc=""): displayName(std::move(name)), description(std::move(desc)){};
+    AbsNode(const AbsNode& node);
+
+    AbsNode(const string& name, const string& desc);
     const string& getDisplayName() const;
     const string& getDescription() const;
     const list<ControlWrapper>& getControls() const{

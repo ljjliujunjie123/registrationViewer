@@ -100,5 +100,21 @@ template<> const SpinBoxControl<int> &SingleControlWrapper::getSpinBoxControl() 
     return *_spinBoxControlI;
 }
 
+SingleControlWrapper::SingleControlWrapper(const SingleControlWrapper& cw) {
+    _type = cw.getType();
+    _displayName = *new string(cw.getDisplayName());
+    _id = cw.getId();
+    switch(cw.getType()){
+        case BUTTON: _buttonControl = new ButtonControl(cw.getButtonControl()); break;
+        case COMBO_BOX: _comboBoxControl = new ComboBoxControl(cw.getComboBoxControl()); break;
+        case CHECKBOX: _checkBoxControl = new CheckboxControl(cw.getCheckboxControl()); break;
+        case DIR_FIELD: _directoryFieldControl = new DirectoryFieldControl(cw.getDirectoryFieldControl()); break;
+        case SLIDER: _sliderControl = new SliderControl(cw.getSliderControl()); break;
+        case SPIN_BOX_I: _spinBoxControlI = new SpinBoxControl<int>(cw.getSpinBoxControl<int>()); break;
+        case SPIN_BOX_F: _spinBoxControlF = new SpinBoxControl<float>(cw.getSpinBoxControl<float>()); break;
+    }
+}
+
+
 
 

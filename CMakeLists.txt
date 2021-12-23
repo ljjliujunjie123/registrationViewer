@@ -28,8 +28,8 @@ aux_source_directory(./Controls CONTROLS_SRC)
 #message(NOTICE "Included Files:" ${NODES_SRC})
 
 #vtk:
-#set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
-set( VTK_DIR "D:/respository/vtk/src")
+set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
+#set( VTK_DIR "D:/respository/vtk/src")
 link_directories(${VTK_DIR}/cmake-build-debug/lib)
 include_directories(
         ${VTK_DIR}/Interaction/Widgets
