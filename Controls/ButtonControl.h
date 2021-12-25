@@ -8,7 +8,7 @@
 #include "BaseControl.h"
 
 enum ICON {
-    IC_ADD, IC_MINUS, IC_ME, IC_HOME, IC_CLOSE, IC_SEARCH
+    IC_ADD, IC_MINUS, IC_ME, IC_HOME, IC_CLOSE, IC_SEARCH, IC_DEL, IC_DIR
 };
 
 class ButtonControl : public BaseControl {
