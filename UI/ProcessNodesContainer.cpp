@@ -33,7 +33,10 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
 
     nodeMenuButton = new NPushButtonExtend(nodesScrollContainer);
     nodeMenuButton->SetMenuButton(0);
-    nodeMenuButton->setIcon(QIcon(getIconFilePath(IC_ADD)));
+    auto ic = QIcon(getIconFilePath(IC_ADD));
+    QSize size(10,10);
+    ic.actualSize(size);
+    nodeMenuButton->setIcon(ic);
     nodeMenuButton->setFixedHeight(menuHeight);
     connect(nodeMenuButton, &NPushButtonExtend::signalMenuClicked, this,
             [&](const QString& nodeString) -> void {

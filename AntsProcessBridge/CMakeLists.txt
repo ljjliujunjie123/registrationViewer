@@ -1,0 +1,6 @@
+aux_source_directory(. SRCS)
+aux_source_directory(../Utils UTILS_SRC)
+aux_source_directory(IPCTest IPC_TEST_SRC)
+add_executable(IPCTest_Server IPCTest/server.cpp ${UTILS_SRC})
+add_executable(IPCTest_Client IPCTest/client.cpp ${UTILS_SRC})
+add_executable(IPCTest IPCTest.cpp)
