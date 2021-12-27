@@ -10,15 +10,22 @@
 
 class ControlWrapper: public SingleControlWrapper{
 public:
+
+    ControlWrapper(CompositeControl control);
+    ControlWrapper(MultiTypeControl control);
+
     ControlWrapper(ButtonControl control): SingleControlWrapper(move(control)){};
     ControlWrapper(CheckboxControl control): SingleControlWrapper(move(control)){};
     ControlWrapper(ComboBoxControl control): SingleControlWrapper(move(control)){};
-    ControlWrapper(CompositeControl control);
     ControlWrapper(DirectoryFieldControl control): SingleControlWrapper(move(control)){};
     ControlWrapper(SliderControl control): SingleControlWrapper(move(control)){};
     ControlWrapper(SpinBoxControl<int> control): SingleControlWrapper(move(control)){};
     ControlWrapper(SpinBoxControl<float> control): SingleControlWrapper(move(control)){};
+    ControlWrapper(TripleSpinControl control): SingleControlWrapper(control){};
+
     const CompositeControl& getCompositeControl() const;
+    const MultiTypeControl& getMultiTypeControl() const;
+
 private:
     CompositeControl* _compositeControl = nullptr;
     MultiTypeControl* _multiTypeControl = nullptr;

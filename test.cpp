@@ -22,7 +22,7 @@ inline void testVtkInteract(){
 }
 
 inline void testControlTemplate(){
-    SpinBoxControl<int> control(1, "Hello", "", {9,10});
+    SpinBoxControl<int> control(1, "Hello", "", {9,10}, 9);
     if( control.getValue() == 9 ) cout<<"pass"<<endl;
     else cout<<"failed"<<endl;
 }

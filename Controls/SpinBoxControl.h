@@ -10,9 +10,9 @@
 template<typename numberType>
 class SpinBoxControl: public BaseControl{
 public:
-    SpinBoxControl(int id, const string& name, const string& desc,pair<numberType, numberType> initRange, bool enabled = true): BaseControl(id, name, desc, enabled) {
+    SpinBoxControl(int id, const string& name, const string& desc,pair<numberType, numberType> initRange, numberType defaultValue, bool enabled = true): BaseControl(id, name, desc, enabled) {
         range = initRange;
-        value = initRange.first;
+        value = defaultValue;
         if(is_same<numberType, int>::value) _type = SPIN_BOX_I;
         else if(is_same<numberType, float>::value) _type = SPIN_BOX_F;
     }

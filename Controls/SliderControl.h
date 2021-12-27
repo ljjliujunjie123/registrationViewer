@@ -12,7 +12,7 @@ using namespace std;
 
 class SliderControl: public BaseControl {
 public:
-    SliderControl(int id, const string &name, const string &desc, pair<int, int> initRange, bool enabled = true);
+    SliderControl(int id, const string &name, const string &desc, pair<int, int> initRange, int defaultValue, bool enabled = true);
     void setRange(int min, int max);
     const pair<int, int>& getRange() const;
 
