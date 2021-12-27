@@ -8,6 +8,10 @@ MultiTypeControl::MultiTypeControl(int id, string name, string desc, map<string,
                                    string defaultSelected, bool enabled): BaseControl(id, name, desc, enabled) {
     selected = defaultSelected;
     subControlMap = controlMap;
+    auto it = controlMap.cbegin();
+    for(int i = 0; it!= controlMap.cend(); i++){
+        optionIndexMap.insert(make_pair(string(it->first), i));
+    }
 }
 
 const map<string, list<SingleControlWrapper>> &MultiTypeControl::getSubControlMap() const {
@@ -20,4 +24,8 @@ void MultiTypeControl::setSelected(string option) {
 
 const string &MultiTypeControl::getSelected() const {
     return selected;
+}
+
+int MultiTypeControl::getSelectedIndex() const {
+    return optionIndexMap[getSelected()];
 }

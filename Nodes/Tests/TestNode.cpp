@@ -100,7 +100,3 @@ void TestNode::generateCmdLineMultiType(const MultiTypeControl& control, string&
     }
     s += " ]";
 }
-
-
-
-
