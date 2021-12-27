@@ -19,6 +19,7 @@ public:
     TripleSpinControl(int id, string name, string desc, SpinDescriptor item1, SpinDescriptor item2, SpinDescriptor item3, bool enabled = true);
     void setValueOf(SPIN_POS pos, int value);
     SpinDescriptor& getSpinOf(SPIN_POS pos) ;
+    int getValueOf(SPIN_POS) ;
 
 private:
     SpinDescriptor spin1;

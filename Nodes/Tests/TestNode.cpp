@@ -57,6 +57,14 @@ string TestNode::generateArgs() const {
             case 9: call += (" -sliderVal " + to_string(control.getSliderControl().getValue())); break;
             case 10: call += (" -sbinIntVal " + to_string(control.getSpinBoxControl<int>().getValue())); break;
             case 11: call += (" -sbinFloatVal " + to_string(control.getSpinBoxControl<float>().getValue())); break;
+            case 12: generateCmdLineMultiType(control.getMultiTypeControl(), call); break;
+            case 22: {
+                auto c = control.getTripleSpinControl();
+                call += (" -tripleSpinVal " + to_string(c.getValueOf(TripleSpinControl::ONE)) + ",");
+                call += (to_string(c.getValueOf(TripleSpinControl::TWO)) + ",");
+                call += to_string(c.getValueOf(TripleSpinControl::THREE));
+                break;
+            }
         }
     }
     return call;
@@ -74,13 +82,23 @@ void TestNode::generateCmdLineComposite(const CompositeControl &control, string 
     s += " ]";
 }
 
-void generateCmdLineMultiType(const MultiTypeControl& control, string& s) const {
-    s += (" -multiType " + control.getSelected() + "[");
-    for(const auto& it: control.getSubControlMap().at(control.getSelected())){
+void TestNode::generateCmdLineMultiType(const MultiTypeControl& control, string& s) const {
+    s += (" -multiType " + control.getSelected() + "[ fixed.nii.gz, moving.nii.gz, ");
+    auto map = control.getSubControlMap();
+    for(auto it: map[control.getSelected()]){
         switch (it.getId()) {
-            case 13: return;
+            case 13: s += (to_string(it.getSpinBoxControl<int>().getValue()) + ", "); break;
+            case 14: s += (it.getComboBoxControl().getSelected() + ", "); break;
+            case 15: s += to_string(static_cast<float>(it.getSliderControl().getValue()) / 100.0); break;
+            case 16: s += (to_string(it.getSpinBoxControl<int>().getValue()) + ", "); break;
+            case 17: s += (it.getComboBoxControl().getSelected() + ", "); break;
+            case 18: s += to_string(static_cast<float>(it.getSliderControl().getValue()) / 100.0); break;
+            case 19: s += (to_string(it.getSpinBoxControl<int>().getValue()) + ", "); break;
+            case 20: s += (it.getComboBoxControl().getSelected() + ", "); break;
+            case 21: s += to_string(static_cast<float>(it.getSliderControl().getValue()) / 100.0); break;
         }
     }
+    s += " ]";
 }
 
 

@@ -7,6 +7,7 @@
 MultiTypeControl::MultiTypeControl(int id, string name, string desc, map<string, list<SingleControlWrapper>> controlMap,
                                    string defaultSelected, bool enabled): BaseControl(id, name, desc, enabled) {
     selected = defaultSelected;
+    subControlMap = controlMap;
 }
 
 const map<string, list<SingleControlWrapper>> &MultiTypeControl::getSubControlMap() const {

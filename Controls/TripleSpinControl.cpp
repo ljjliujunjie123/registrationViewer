@@ -29,3 +29,7 @@ TripleSpinControl::SpinDescriptor &TripleSpinControl::getSpinOf(TripleSpinContro
         case THREE: return spin3;
     }
 }
+
+int TripleSpinControl::getValueOf(TripleSpinControl::SPIN_POS pos)  {
+    return getSpinOf(pos).value;
+}
