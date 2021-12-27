@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QMenu>
-#include "UI/ImageShownContainer.h"
+#include "UI/ImageShownController.h"
 #include "UI/ProcessNodesContainer.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,7 +28,7 @@ private:
     QAction *actionOpenFileOne;
     QAction *actionOpenFileTwo;
 
-    ImageShownContainer *imageShownContainer;
+    ImageShownController *imageShownController;
     ProcessNodesContainer *processNodesContainer;
 
     void retranslateUI();

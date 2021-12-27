@@ -15,13 +15,13 @@ public:
     const map<string, list<SingleControlWrapper>>& getSubControlMap() const;
     void setSelected(string option);
     const string& getSelected() const;
-    int getSelectedIndex() const;
-
+    int getSelectedIndex();
+    string& getSelectedStringFromIndex(int index);
 private:
     string selected;
     map<string, list<SingleControlWrapper>> subControlMap;
     map<string, int> optionIndexMap;
-
+    map<int, string> indexOptionMap;
 };
 
 

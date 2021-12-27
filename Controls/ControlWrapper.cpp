@@ -24,7 +24,7 @@ ControlWrapper::ControlWrapper(MultiTypeControl control) {
     _id = control.getId();
 }
 
-const MultiTypeControl &ControlWrapper::getMultiTypeControl() const {
+MultiTypeControl &ControlWrapper::getMultiTypeControl() {
     checkNull(_multiTypeControl);
     return *_multiTypeControl;
 }

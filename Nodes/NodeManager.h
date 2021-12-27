@@ -19,6 +19,8 @@ public:
         static NodeManager instance;
         return instance;
     }
+
+    static void executeCurrentNodes();
     //Actual functions:
 public:
     void registerNode(NodeWrapper node, const string& listItemDisplay);
@@ -29,9 +31,12 @@ public:
     void addShownNode(const NodeWrapper& node, int index);
     void removeShownNode(int index);
     list<NodeWrapper>& getShownNodes();
+
 private:
     map<string, NodeWrapper> registeredNodes;
     list<NodeWrapper> shownNodes;
 };
+
+
 
 #endif //REGISTRATIONVIEWER_NODEMANAGER_H

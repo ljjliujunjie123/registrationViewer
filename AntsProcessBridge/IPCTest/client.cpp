@@ -106,7 +106,7 @@ void* openSharedMemory(int key, size_t size){
     if (shmId == -1) end("shmget failed");
 
     void* shmAddr = shmat(shmId, nullptr, 0);
-    if(shmAddr = (void*) -1) end("shmat failed");
+    if(shmAddr == (void*) -1) end("shmat failed");
 
     void* target = new char[size+512];
     memset(target, 0, size+512);

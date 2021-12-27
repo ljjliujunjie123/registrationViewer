@@ -14,6 +14,8 @@
 NPushButtonExtend::NPushButtonExtend(QWidget *parent)
     :QPushButton(parent)
 {
+    setObjectName("NPushButton");
+    setStyleSheet("border: none;");
     m_menuPopRc = QRect(0, 0, width(), height());
 }
 

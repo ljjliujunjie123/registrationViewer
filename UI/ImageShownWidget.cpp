@@ -5,15 +5,22 @@
 #include <vtkCamera.h>
 #include <vtkDataSetMapper.h>
 #include <vtkProperty.h>
+#include <vtkNIFTIImageReader.h>
+
+VTK_MODULE_INIT(vtkRenderingOpenGL2);
+VTK_MODULE_INIT(vtkInteractionStyle);
 
 ImageShownWidget::ImageShownWidget(QWidget* parent)
     :QVTKOpenGLNativeWidget(parent){
 
 }
 
-void ImageShownWidget::showImageFromDir(string dirPath) {
-    vtkSmartPointer<vtkDICOMImageReader> reader = vtkSmartPointer<vtkDICOMImageReader>::New();
-    reader->SetDirectoryName(dirPath.c_str());
+void ImageShownWidget::showImageFromDir(string path) {
+//    dirPath = "/Users/zzy/Downloads/tes/Body_CT_202";
+//    vtkSmartPointer<vtkDICOMImageReader> reader = vtkSmartPointer<vtkDICOMImageReader>::New();
+    vtkSmartPointer<vtkNIFTIImageReader>  reader = vtkSmartPointer<vtkNIFTIImageReader>::New();
+//    reader->SetDirectoryName(dirPath.c_str());
+    reader->SetFileName(path.c_str());
     reader->Update();
 
     int imageDims[3];
@@ -26,7 +33,7 @@ void ImageShownWidget::showImageFromDir(string dirPath) {
     cast->SetOutputScalarTypeToUnsignedChar();
     cast->Update();
 
-    vtkSmartPointer<vtkGPUVolumeRayCastMapper> volumeMapper = vtkSmartPointer<vtkGPUVolumeRayCastMapper>::New();
+    vtkSmartPointer<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper = vtkSmartPointer<vtkOpenGLGPUVolumeRayCastMapper>::New();
 //    基于GPU加速的光线投射体绘制算法
     volumeMapper->SetInputData(cast->GetOutput());
     volumeMapper->SetImageSampleDistance(1.0);
@@ -61,11 +68,6 @@ void ImageShownWidget::showImageFromDir(string dirPath) {
     volume->SetProperty(volumeProperty);
 
     vtkSmartPointer<vtkRenderer> rendererVolume = vtkSmartPointer<vtkRenderer>::New();
-    vtkSmartPointer<vtkRenderWindow> renderWindow = vtkSmartPointer<vtkRenderWindow>::New();
-
-
-    vtkSmartPointer< vtkRenderWindowInteractor > iren =
-            vtkSmartPointer< vtkRenderWindowInteractor >::New();
 
     rendererVolume->AddVolume(volume);
     renderWindow->AddRenderer(rendererVolume);
@@ -73,4 +75,8 @@ void ImageShownWidget::showImageFromDir(string dirPath) {
 
     renderWindow->Render();
     iren->Start();
+}
+
+void ImageShownWidget::setWindowTitle(char* title) {
+    renderWindow.Get()->SetWindowName(title);
 }

@@ -10,6 +10,24 @@ NodeWrapper::NodeWrapper(TestNode node): baseNode(static_cast<AbsNode>(*(new Tes
     _displayName = node.getDisplayName();
 }
 
+NodeWrapper::NodeWrapper(AntsAffineRegistrationNode node): baseNode(static_cast<AbsNode>(*(new AntsAffineRegistrationNode(node)))) {
+    _antsAffineNode = new AntsAffineRegistrationNode(node);
+    _type = ANTS_TRANSFORM_AFFINE;
+    _displayName = node.getDisplayName();
+}
+
+NodeWrapper::NodeWrapper(AntsRigidRegistrationNode node): baseNode(static_cast<AbsNode>(*(new AntsRigidRegistrationNode(node)))) {
+    _antsRigidNode = new AntsRigidRegistrationNode(node);
+    _type = ANTS_TRANSFORM_RIGID;
+    _displayName = node.getDisplayName();
+}
+
+NodeWrapper::NodeWrapper(AntsSyNRegistrationNode node): baseNode(static_cast<AbsNode>(*(new AntsSyNRegistrationNode(node)))) {
+    _antsSyNNode = new AntsSyNRegistrationNode(node);
+    _type = ANTS_TRANSFORM_SYN;
+    _displayName = node.getDisplayName();
+}
+
 const string & NodeWrapper::getDisplayName() const {
     return _displayName;
 }

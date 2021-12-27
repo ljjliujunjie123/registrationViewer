@@ -3,6 +3,7 @@
 //
 
 #include "NodeManager.h"
+#include "DemoExecutor.h"
 
 void NodeManager::registerNode(NodeWrapper node, const string& itemDisplay) {
     auto it = registeredNodes.cbegin();
@@ -44,6 +45,11 @@ void NodeManager::removeShownNode(int index) {
     auto it = shownNodes.begin();
     advance(it,index);
     shownNodes.erase(it);
+}
+
+void NodeManager::executeCurrentNodes() {
+    DemoExecutor::executeNodes(getInstance().shownNodes);
+
 }
 
 

@@ -24,7 +24,7 @@ public:
     ControlWrapper(TripleSpinControl control): SingleControlWrapper(control){};
 
     const CompositeControl& getCompositeControl() const;
-    const MultiTypeControl& getMultiTypeControl() const;
+    MultiTypeControl& getMultiTypeControl();
 
 private:
     CompositeControl* _compositeControl = nullptr;

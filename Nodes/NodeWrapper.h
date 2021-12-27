@@ -5,6 +5,9 @@
 #ifndef REGISTRATIONVIEWER_NODEWRAPPER_H
 #define REGISTRATIONVIEWER_NODEWRAPPER_H
 #include "Tests/TestNode.h"
+#include "AntsAffineRegistrationNode.h"
+#include "AntsRigidRegistrationNode.h"
+#include "AntsSyNRegistrationNode.h"
 
 enum NODE_TYPE{ TEST,
         ANTS_CONFIG,
@@ -18,6 +21,9 @@ class NodeWrapper {
 //  Constructors:
 public:
     NodeWrapper(TestNode node);
+    NodeWrapper(AntsAffineRegistrationNode node);
+    NodeWrapper(AntsRigidRegistrationNode node);
+    NodeWrapper(AntsSyNRegistrationNode node);
 
 
 //  Methods:
@@ -34,6 +40,9 @@ private:
     AbsNode baseNode;
 
     TestNode* _testNode = nullptr;
+    AntsAffineRegistrationNode* _antsAffineNode = nullptr;
+    AntsRigidRegistrationNode* _antsRigidNode = nullptr;
+    AntsSyNRegistrationNode* _antsSyNNode = nullptr;
 };
 
 

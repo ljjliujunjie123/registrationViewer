@@ -11,6 +11,8 @@ MultiTypeControl::MultiTypeControl(int id, string name, string desc, map<string,
     auto it = controlMap.cbegin();
     for(int i = 0; it!= controlMap.cend(); i++){
         optionIndexMap.insert(make_pair(string(it->first), i));
+        indexOptionMap.insert(make_pair(i,string(it->first)));
+        it++;
     }
 }
 
@@ -26,6 +28,11 @@ const string &MultiTypeControl::getSelected() const {
     return selected;
 }
 
-int MultiTypeControl::getSelectedIndex() const {
+int MultiTypeControl::getSelectedIndex()  {
     return optionIndexMap[getSelected()];
 }
+
+string& MultiTypeControl::getSelectedStringFromIndex(int index) {
+    return indexOptionMap[index];
+}
+

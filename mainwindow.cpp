@@ -14,9 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setObjectName("MainWindow");
-    resize(1000,800);
+    resize(600,800);
     centralWidget = new QWidget(this);
-    centralWidget->setMinimumSize(1000,800);
+    centralWidget->setFixedWidth(600);
     setCentralWidget(centralWidget);
 
     setWindowIcon(QIcon(R"(D:\respository\MRViewer\ui_source\win_title_icon.png)"));
@@ -30,14 +30,16 @@ MainWindow::MainWindow(QWidget *parent)
     actionOpenFileOne = new QAction(this);
     connect(actionOpenFileOne, &QAction::triggered, this,
             [&](){
-        auto dirPath = QFileDialog::getExistingDirectory(this, "选择series","");
-        imageShownContainer->showFirstImage(dirPath.toStdString());
+//        auto dirPath = QFileDialog::getExistingDirectory(this, "选择series","");
+        auto path = QFileDialog::getOpenFileName(this, "", "*");
+        imageShownController->showFirstImage(path.toStdString());
     });
     actionOpenFileTwo = new QAction(this);
     connect(actionOpenFileTwo, &QAction::triggered, this,
             [&](){
-                auto dirPath = QFileDialog::getExistingDirectory(this, "选择series","");
-                imageShownContainer->showSecondImage(dirPath.toStdString());
+//                auto dirPath = QFileDialog::getExistingDirectory(this, "选择series","");
+                auto path = QFileDialog::getOpenFileName(this, "", "*");
+                imageShownController->showSecondImage(path.toStdString());
     });
     menu->addAction(actionOpenFileOne);
     menu->addAction(actionOpenFileTwo);
@@ -53,12 +55,11 @@ MainWindow::MainWindow(QWidget *parent)
     auto* splitter = new QSplitter(centralWidget);
     splitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    imageShownContainer = new ImageShownContainer(splitter);
+    imageShownController = new ImageShownController(this->centralWidget);
     processNodesContainer = new ProcessNodesContainer(splitter);
 
-    splitter->addWidget(imageShownContainer);
     splitter->addWidget(processNodesContainer);
-
+    splitter->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     auto* mainWinLayout = new QVBoxLayout();
     mainWinLayout->setContentsMargins(0,0,0,0);
     mainWinLayout->setSpacing(0);

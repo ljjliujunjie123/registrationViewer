@@ -11,12 +11,14 @@
 #include "qboxlayout.h"
 #include "qformlayout.h"
 #include "qscrollarea.h"
+#include "qprogressbar.h"
 #include "NPushButtonExtend.h"
 #include "../Nodes/NodeManager.h"
 #include "../Nodes/NodeWrapper.h"
 #include "../Nodes/AbsNode.h"
 #include "../Controls/BaseControl.h"
 #include "../Controls/ButtonControl.h"
+#include "../Controls/TripleSpinControl.h"
 #include <QSlider>
 #include <QLabel>
 #include <QComboBox>
@@ -31,6 +33,10 @@ class ProcessNodesContainer: public QFrame {
 public:
     ProcessNodesContainer(QWidget *parent = nullptr);
 
+    const string& getSaveDir() const {
+        return saveDir;
+    };
+
 protected:
     virtual void resizeEvent(QResizeEvent *event);
 private:
@@ -39,8 +45,10 @@ private:
     NPushButtonExtend* nodeMenuButton;
     QVBoxLayout* nodesScrollLayout;
     QHBoxLayout* nodesMenuLayout;
-
+    QPushButton* startButton;
     NodeManager& nodeManger = NodeManager::getInstance();
+
+    string saveDir = "";
 
     void parseNodeMenu();
 
@@ -50,7 +58,21 @@ private:
 
     QFrame* createCompositeControl(const CompositeControl& compositeControl);
 
-    QLabel* createControlName(const QString& text, int height, int width = 150);
+    QFrame* createMultiControl(MultiTypeControl& multiTypeControl, QFrame& nodeContainer);
+
+    QLabel* createControlName(const QString& text, int height, bool isBold = false, int width = 150);
+
+    QHBoxLayout* createNodeTitle(QFrame& nodeContainer, const QString& text, int height);
+
+    QVBoxLayout* createNodeTail(AbsNode node, int height);
+
+    QHBoxLayout* createSaveDir(int height);
+
+    QHBoxLayout* createStartLayout(int height);
+
+    QVBoxLayout* createSingleTripple(TripleSpinControl::SpinDescriptor& mstruct, int height);
+
+    QFrame* createMultiControlList(list<SingleControlWrapper>& controlList);
 };
 
 #endif //REGISTRATIONVIEWER_PROCESSNODESCONTAINER_H
