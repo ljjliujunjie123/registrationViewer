@@ -27,8 +27,20 @@ MainWindow::MainWindow(QWidget *parent)
     menuBar->setGeometry(0,0,this->width(),30);
     setMenuBar(menuBar);
 
-    actionOpenFile = new QAction(this);
-    menu->addAction(actionOpenFile);
+    actionOpenFileOne = new QAction(this);
+    connect(actionOpenFileOne, &QAction::triggered, this,
+            [&](){
+        auto dirPath = QFileDialog::getExistingDirectory(this, "选择series","");
+        imageShownContainer->showFirstImage(dirPath.toStdString());
+    });
+    actionOpenFileTwo = new QAction(this);
+    connect(actionOpenFileTwo, &QAction::triggered, this,
+            [&](){
+                auto dirPath = QFileDialog::getExistingDirectory(this, "选择series","");
+                imageShownContainer->showSecondImage(dirPath.toStdString());
+    });
+    menu->addAction(actionOpenFileOne);
+    menu->addAction(actionOpenFileTwo);
     menuBar->addAction(menu->menuAction());
 
     // 设置状态栏 只能有一个
@@ -64,7 +76,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::retranslateUI() {
     menu->setTitle(qApp->translate("MainWindow","文件"));
-    actionOpenFile->setText(qApp->translate("MainWindow","打开文件"));
+    actionOpenFileOne->setText(qApp->translate("MainWindow","打开待匹配文件"));
+    actionOpenFileTwo->setText(qApp->translate("MainWindow","打开匹配目标"));
 }
 
 

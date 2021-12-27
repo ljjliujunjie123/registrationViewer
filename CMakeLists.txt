@@ -6,15 +6,16 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "/Users/zzy/Qt/5.15.2/clang_64")
+#set(CMAKE_PREFIX_PATH "/Users/zzy/Qt/5.15.2/clang_64")
 #set(CMAKE_PREFIX_PATH "E:/QT/5.15.2/mingw81_64")
 #include_directories([SYSTEM] "/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include")
-set(CMAKE_OSX_SYSROOT "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk")
+#set(CMAKE_OSX_SYSROOT "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk")
 
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
+        OpenGL
         REQUIRED)
 
 add_subdirectory(Controls)
@@ -29,27 +30,40 @@ aux_source_directory(./Controls CONTROLS_SRC)
 #message(NOTICE "Included Files:" ${NODES_SRC})
 
 #vtk:
-set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
-#set( VTK_DIR "D:/respository/vtk/src")
-link_directories(${VTK_DIR}/cmake-build-debug/lib)
+#set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
+set( VTK_DIR "D:/respository/vtk-9.1.0")
+#link_directories(${VTK_DIR}/cmake-build-debug/lib)
+link_libraries(${VTK_DIR}/Build/lib/Debug)
 include_directories(
         ${VTK_DIR}/Interaction/Widgets
+        ${VTK_DIR}/GUISupport/Qt
+        ${VTK_DIR}/Build/GUISupport/Qt
+        ${VTK_DIR}/IO/Image
+        ${VTK_DIR}/Build/IO/Image
+        ${VTK_DIR}/Filters/Core
+        ${VTK_DIR}/Imaging/Core
+        ${VTK_DIR}/Build/Imaging/Core
+        ${VTK_DIR}/Rendering/Volume
+        ${VTK_DIR}/Build/Rendering/Volume
         ${VTK_DIR}/Rendering/Core
-        ${VTK_DIR}/cmake-build-debug/Interaction/Widgets/
+        ${VTK_DIR}/Build/Interaction/Widgets/
         ${VTK_DIR}/Common/Core
+        ${VTK_DIR}/Build/Common/Core
         ${VTK_DIR}/Common/Color
         ${VTK_DIR}/Common/ComputationalGeometry
         ${VTK_DIR}/Common/DataModel
+        ${VTK_DIR}/Build/Common/DataModel
         ${VTK_DIR}/Common/ExecutionModel
         ${VTK_DIR}/Common/Math
         ${VTK_DIR}/Common/Misc
+        ${VTK_DIR}/Build/Common/Misc
         ${VTK_DIR}/Common/System
         ${VTK_DIR}/Common/Transforms
-        ${VTK_DIR}/cmake-build-debug/Common/Core
-        ${VTK_DIR}/cmake-build-debug/Common/ExecutionModel
+        ${VTK_DIR}/Build/Common/Core
+        ${VTK_DIR}/Build/Common/ExecutionModel
         ${VTK_DIR}/Utilities/KWIML
-        ${VTK_DIR}/cmake-build-debug/Rendering/Core
-        ${VTK_DIR}/cmake-build-debug/Filters/Core
+        ${VTK_DIR}/Build/Rendering/Core
+        ${VTK_DIR}/Build/Filters/Core
 )
 
 
@@ -65,3 +79,22 @@ target_link_libraries(registrationViewer
         Qt5::Gui
         Qt5::Widgets
         )
+
+#set( VTK_DIR "D:/respository/vtk-9.1.0/Build/lib/cmake/vtk-9.1")
+set( VTK_DIR "D:/respository/vtk-9.1.0/Build")
+find_package(VTK
+        REQUIRED
+        COMPONENTS
+        RenderingCore
+        CommonCore
+        GUISupportQt
+        IOLegacy)
+target_link_libraries(registrationViewer
+        VTK::GUISupportQt
+        VTK::IOLegacy
+        VTK::CommonCore
+        VTK::RenderingCore
+        )
+vtk_module_autoinit(
+        TARGETS registrationViewer
+        MODULES VTK::GUISupportQt VTK::IOLegacy VTK::CommonCore VTK::RenderingCore)

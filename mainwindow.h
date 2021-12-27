@@ -25,7 +25,8 @@ private:
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menu;
-    QAction *actionOpenFile;
+    QAction *actionOpenFileOne;
+    QAction *actionOpenFileTwo;
 
     ImageShownContainer *imageShownContainer;
     ProcessNodesContainer *processNodesContainer;
