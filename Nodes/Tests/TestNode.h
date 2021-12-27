@@ -17,6 +17,7 @@ public:
 private:
     void initControls();
     void generateCmdLineComposite(const CompositeControl& control, string& s) const;
+    void generateCmdLineMultiType(const MultiTypeControl& control, string& s) const;
 };
 
 

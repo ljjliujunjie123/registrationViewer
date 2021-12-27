@@ -5,10 +5,18 @@
 #include "MultiTypeControl.h"
 
 MultiTypeControl::MultiTypeControl(int id, string name, string desc, map<string, list<SingleControlWrapper>> controlMap,
-                                   bool enabled): BaseControl(id, name, desc, enabled) {
-
+                                   string defaultSelected, bool enabled): BaseControl(id, name, desc, enabled) {
+    selected = defaultSelected;
 }
 
 const map<string, list<SingleControlWrapper>> &MultiTypeControl::getSubControlMap() const {
     return subControlMap;
+}
+
+void MultiTypeControl::setSelected(string option) {
+    selected = option;
+}
+
+const string &MultiTypeControl::getSelected() const {
+    return selected;
 }

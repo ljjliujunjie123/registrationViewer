@@ -11,10 +11,13 @@
 
 class MultiTypeControl: public BaseControl {
 public:
-    MultiTypeControl(int id, string name, string desc, map<string, list<SingleControlWrapper>> controlMap, bool enabled = true);
+    MultiTypeControl(int id, string name, string desc, map<string, list<SingleControlWrapper>> controlMap, string defaultSelected, bool enabled = true);
     const map<string, list<SingleControlWrapper>>& getSubControlMap() const;
+    void setSelected(string option);
+    const string& getSelected() const;
 
 private:
+    string selected;
     map<string, list<SingleControlWrapper>> subControlMap;
 
 };

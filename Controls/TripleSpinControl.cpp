@@ -18,7 +18,7 @@ void TripleSpinControl::setValueOf(TripleSpinControl::SPIN_POS pos, int value) {
         case ONE: spin1.value = value; return;
         case TWO: spin2.value = value; return;
         case THREE: spin3.value = value; return;
-        default: return
+        default: return;
     }
 }
 

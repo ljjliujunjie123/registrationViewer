@@ -30,7 +30,7 @@ void TestNode::initControls() {
                 ControlWrapper(ComboBoxControl(20, "Sampling Strategy", "Choose a Strategy for choosing sampling points",{"None", "Regular", "Random"}, "Regular")),
                 ControlWrapper(SliderControl(21, "Sampling Percentage", "", {0, 100}, 25))
             }}
-    });
+    }, "MI");
     auto initControls = {
             ControlWrapper(ButtonControl(5,"Button", "Button Description", IC_DEL, true)),
             ControlWrapper(CheckboxControl(6,"CheckBox", "CheckBox Desc", false, false)),
@@ -38,7 +38,7 @@ void TestNode::initControls() {
             composite,
             multiType,
             ControlWrapper(DirectoryFieldControl(8,"Dir field", "Dir field desc")),
-            ControlWrapper(SliderControl(9,"Slider", "Slider Desc", {9,255})),
+            ControlWrapper(SliderControl(9,"Slider", "Slider Desc", {9,255}, 15)),
             ControlWrapper(SpinBoxControl<int>(10,"Spin box <int>", "Spin box int desc", {5,100},25)),
             ControlWrapper(SpinBoxControl<float>(11,"Spin box <float>", "Spin box float desc", {0.5,1.0}, 0.7)),
             ControlWrapper(TripleSpinControl(22, "Triple Spin Control", "Trio desc", {1,10,3, "item1"}, {1,10,5, "item2"}, {1,10,7, "item3"}))
@@ -72,6 +72,15 @@ void TestNode::generateCmdLineComposite(const CompositeControl &control, string 
         }
     }
     s += " ]";
+}
+
+void generateCmdLineMultiType(const MultiTypeControl& control, string& s) const {
+    s += (" -multiType " + control.getSelected() + "[");
+    for(const auto& it: control.getSubControlMap().at(control.getSelected())){
+        switch (it.getId()) {
+            case 13: return;
+        }
+    }
 }
 
 
