@@ -6,6 +6,7 @@
 #define REGISTRATIONVIEWER_CONTROLWRAPPER_H
 #include "SingleControlWrapper.h"
 #include "CompositeControl.h"
+#include "MultiTypeControl.h"
 
 class ControlWrapper: public SingleControlWrapper{
 public:
@@ -20,6 +21,7 @@ public:
     const CompositeControl& getCompositeControl() const;
 private:
     CompositeControl* _compositeControl = nullptr;
+    MultiTypeControl* _multiTypeControl = nullptr;
 };
 
 

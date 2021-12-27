@@ -53,6 +53,13 @@ SingleControlWrapper::SingleControlWrapper(SpinBoxControl<float> control) {
     _id = control.getId();
 }
 
+SingleControlWrapper::SingleControlWrapper(TripleSpinControl control) {
+    _tripleSpinControl = new TripleSpinControl(control);
+    _type = TRIPLE_SPIN;
+    _displayName = control.getDisplayName();
+    _id = control.getId();
+}
+
 CONTROL_TYPE SingleControlWrapper::getType() const {
     return _type;
 }
@@ -93,6 +100,11 @@ int SingleControlWrapper::getId() const {
 template<> SpinBoxControl<float> &SingleControlWrapper::getSpinBoxControl() {
     checkNull(_spinBoxControlF);
     return *_spinBoxControlF;
+}
+
+TripleSpinControl &SingleControlWrapper::getTripleSpinControl() {
+    checkNull(_tripleSpinControl);
+    return *_tripleSpinControl;
 }
 
 template<> SpinBoxControl<int> &SingleControlWrapper::getSpinBoxControl() {

@@ -12,11 +12,11 @@
 
 using namespace std;
 
-enum CONTROL_TYPE{SLIDER, DIR_FIELD, COMBO_BOX, BUTTON, CHECKBOX, SPIN_BOX_I, SPIN_BOX_F, COMPOSITE, ABSTRACT};
+enum CONTROL_TYPE{SLIDER, DIR_FIELD, COMBO_BOX, BUTTON, CHECKBOX, SPIN_BOX_I, SPIN_BOX_F, COMPOSITE, TRIPLE_SPIN, MULTI_TYPE, ABSTRACT};
 class BaseControl{
 public:
     BaseControl();
-    BaseControl(int id, const string& name, const string& desc, bool enabled = true);
+    BaseControl(int id, string name, string desc, bool enabled = true);
     virtual CONTROL_TYPE getControlType() const{
          return _type;
     };

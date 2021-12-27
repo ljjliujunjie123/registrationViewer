@@ -11,6 +11,7 @@
 #include "DirectoryFieldControl.h"
 #include "SliderControl.h"
 #include "SpinBoxControl.h"
+#include "TripleSpinControl.h"
 
 
 class SingleControlWrapper {
@@ -23,6 +24,7 @@ public:
     SingleControlWrapper(SliderControl control);
     SingleControlWrapper(SpinBoxControl<int> control);
     SingleControlWrapper(SpinBoxControl<float> control);
+    SingleControlWrapper(TripleSpinControl control);
     CONTROL_TYPE getType() const;
     const string& getDisplayName() const;
     int getId() const;
@@ -33,6 +35,7 @@ public:
     SliderControl& getSliderControl() ;
     template<typename numberType>
     SpinBoxControl<numberType>& getSpinBoxControl() ;
+    TripleSpinControl& getTripleSpinControl();
 protected:
     CONTROL_TYPE _type;
     string _displayName;
@@ -44,6 +47,7 @@ protected:
     SliderControl* _sliderControl = nullptr;
     SpinBoxControl<int>* _spinBoxControlI = nullptr;
     SpinBoxControl<float>* _spinBoxControlF = nullptr;
+    TripleSpinControl* _tripleSpinControl = nullptr;
 
 };
 
