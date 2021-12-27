@@ -33,7 +33,7 @@ aux_source_directory(./Controls CONTROLS_SRC)
 #set( VTK_DIR "/Users/zzy/Documents/GitHub/VTK-9.1.0")
 set( VTK_DIR "D:/respository/vtk-9.1.0")
 #link_directories(${VTK_DIR}/cmake-build-debug/lib)
-link_libraries(${VTK_DIR}/Build/lib/Debug)
+link_directories(${VTK_DIR}/Build/lib/Debug)
 include_directories(
         ${VTK_DIR}/Interaction/Widgets
         ${VTK_DIR}/GUISupport/Qt
@@ -80,21 +80,9 @@ target_link_libraries(registrationViewer
         Qt5::Widgets
         )
 
-#set( VTK_DIR "D:/respository/vtk-9.1.0/Build/lib/cmake/vtk-9.1")
-set( VTK_DIR "D:/respository/vtk-9.1.0/Build")
-find_package(VTK
-        REQUIRED
-        COMPONENTS
-        RenderingCore
-        CommonCore
-        GUISupportQt
-        IOLegacy)
 target_link_libraries(registrationViewer
-        VTK::GUISupportQt
-        VTK::IOLegacy
-        VTK::CommonCore
-        VTK::RenderingCore
+        vtkGUISupportQt-9.1d
+        vtkIOLegacy-9.1d
+        vtkCommonCore-9.1d
+        vtkRenderingCore-9.1d
         )
-vtk_module_autoinit(
-        TARGETS registrationViewer
-        MODULES VTK::GUISupportQt VTK::IOLegacy VTK::CommonCore VTK::RenderingCore)
