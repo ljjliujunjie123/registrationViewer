@@ -37,6 +37,9 @@ public:
         return saveDir;
     };
 
+signals:
+    void startSignal();
+
 protected:
     virtual void resizeEvent(QResizeEvent *event);
 private:

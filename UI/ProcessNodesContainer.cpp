@@ -886,7 +886,7 @@ QHBoxLayout *ProcessNodesContainer::createStartLayout(int height) {
             " #startbutton { background-color: rgb(52,132,247); border: none; border-radius: 10px; }"
     );
     QFont font = startButton->font();
-    font.setPointSize(35);
+    font.setPointSize(30);
     font.setBold(false);
     startButton->setFont(font);
     startButton->setFixedHeight(height);
@@ -896,6 +896,7 @@ QHBoxLayout *ProcessNodesContainer::createStartLayout(int height) {
     connect(startButton, &QPushButton::clicked, this,
             [&]() -> void {
                 startButton->setText("Running");
+                emit startSignal();
                 cout<< "start!" << endl;
             }
     );

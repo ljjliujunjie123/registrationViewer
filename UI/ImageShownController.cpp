@@ -22,9 +22,10 @@ void ImageShownController::showFirstImage(string dirPath) {
 void ImageShownController::showSecondImage(string dirPath) {
     preImageTwo->showImageFromDir(dirPath);
     preImageTwo->setWindowTitle("目标匹配图像");
+    resImage->setFixImagePath(dirPath);
 }
 
 void ImageShownController::showResImage(string dirPath) {
-    resImage->showImageFromDir(dirPath);
+    resImage->showRegistrationImage(dirPath);
     resImage->setWindowTitle("匹配结果");
 }

@@ -66,6 +66,10 @@ MainWindow::MainWindow(QWidget *parent)
     mainWinLayout->addWidget(splitter);
     centralWidget->setLayout(mainWinLayout);
 
+    connect(processNodesContainer, &ProcessNodesContainer::startSignal, this,
+            [&]() {
+//开始配准的触发信号
+    });
     retranslateUI();
     show();
 }
@@ -79,6 +83,10 @@ void MainWindow::retranslateUI() {
     menu->setTitle(qApp->translate("MainWindow","文件"));
     actionOpenFileOne->setText(qApp->translate("MainWindow","打开待匹配文件"));
     actionOpenFileTwo->setText(qApp->translate("MainWindow","打开匹配目标"));
+}
+
+void MainWindow::serverListener() {
+//    监听server的listener
 }
 
 

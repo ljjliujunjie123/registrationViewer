@@ -30,7 +30,14 @@ public:
     void setWindowTitle(char* title);
 
     void showImageFromDir(string dirPath);
+
+    void showRegistrationImage(string resPath);
+
+    void setFixImagePath(string path) {
+        fixImagePath = path;
+    };
 private:
+    string fixImagePath = "";
     vtkSmartPointer<vtkRenderWindow> renderWindow = vtkSmartPointer<vtkRenderWindow>::New();
 
     vtkSmartPointer< vtkRenderWindowInteractor > iren =

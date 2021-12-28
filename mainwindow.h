@@ -32,5 +32,7 @@ private:
     ProcessNodesContainer *processNodesContainer;
 
     void retranslateUI();
+
+    void serverListener();
 };
 #endif // MAINWINDOW_H
