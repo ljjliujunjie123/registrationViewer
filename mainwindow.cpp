@@ -69,6 +69,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(processNodesContainer, &ProcessNodesContainer::startSignal, this,
             [&]() {
 //开始配准的触发信号
+            auto path = "/Volumes/Samsung_T5/Transfer/ZS18149923/result_1226/Stage3_level3_Iter0001.nii.gz";
+            imageShownController->showResImage(path);
+//        NodeManager::getInstance().executeCurrentNodes(
+//                [&](string filepath) {
+//                    cout<<filepath<<endl;
+//                    imageShownController->showResImage(filepath);
+//                }
+//                );
     });
     retranslateUI();
     show();

@@ -15,12 +15,28 @@ void DemoExecutor::runNode(AbsNode &node, int interval) {
 }
 
 void DemoExecutor::executeNode(AbsNode &node) {
-    thread executor(runNode, node, 1000);
+    int interval = 1000;
+    auto executor = thread(runNode, std::ref(node), std::cref(interval));
     executor.join();
 }
 
-void DemoExecutor::executeNodes(list<NodeWrapper> &nodes) {
+void DemoExecutor::executeNodes(list<NodeWrapper> &nodes, function<void(string)> fileUpdateListener) {
+    thread fileWorker(runGetFiles, std::ref(fileUpdateListener));
     for(auto& it: nodes){
-        executeNode(reinterpret_cast<AbsNode &>(it));
+//        executeNode(reinterpret_cast<AbsNode &>(it));
+    }
+    fileWorker.join();
+}
+
+void DemoExecutor::runGetFiles(function<void(string)> fileUpdateListener) {
+    string path="/Volumes/Samsung_T5/Transfer/ZS18149923/result_1226/";
+    auto demoPaths ={"Stage1_level1_Iter0001.nii.gz", "Stage1_level1_Iter0020.nii.gz", "Stage1_level2_Iter0001.nii.gz", "Stage1_level3_Iter0010.nii.gz", "Stage1_level4_Iter0010.nii.gz",
+                     "Stage2_level1_Iter0001.nii.gz", "Stage2_level1_Iter0040.nii.gz", "Stage2_level2_Iter0001.nii.gz", "Stage2_level2_Iter0030.nii.gz", "Stage2_level3_Iter0020.nii.gz",
+                     "Stage2_level4_Iter0001.nii.gz", "Stage3_level1_Iter0001.nii.gz", "Stage3_level1_Iter0030.nii.gz", "Stage3_level1_Iter0100.nii.gz", "Stage3_level2_Iter0030.nii.gz",
+                     "Stage3_level2_Iter0050.nii.gz", "Stage3_level3_Iter0001.nii.gz", "Stage3_level3_Iter0030.nii.gz", "Stage3_level3_Iter0050.nii.gz"};
+    for(string item: demoPaths){
+        string realPath = path + item;
+        fileUpdateListener(realPath);
+        this_thread::sleep_for(chrono::milliseconds(10000));
     }
 }

@@ -16,8 +16,8 @@ void initNodeManager(){
     NodeManager& inst = NodeManager::getInstance();
     inst.registerNode(NodeWrapper(TestNode("test node", "test node desc")), "TestNode in List");
     inst.registerNode(NodeWrapper(AntsRigidRegistrationNode("Ants Registration Rigid", "")), "Ants Registration Rigid");
-    inst.registerNode(NodeWrapper(AntsAffineRegistrationNode("ants_affine", "")), "Ants Registration Affine");
-    inst.registerNode(NodeWrapper(AntsSyNRegistrationNode("ants_syn", "")), "Ants Deformable Registration SyN");
+    inst.registerNode(NodeWrapper(AntsAffineRegistrationNode("Ants Registration Affine", "")), "Ants Registration Affine");
+    inst.registerNode(NodeWrapper(AntsSyNRegistrationNode("Ants Registration SyN", "")), "Ants Deformable Registration SyN");
     //    auto it = inst.getNodes().cbegin();
 //    while (it != inst.getNodes().cend()){
 //        cout<<it->first<<" "<<it->second.getDisplayName()<<endl;

@@ -32,12 +32,17 @@ public:
     const string & getDisplayName() const;
     inline bool operator==(const NodeWrapper& rhs);
     AbsNode& getBaseNode() {
-        return baseNode;
+        switch(_type){
+            case TEST: return *_testNode; break;
+            case ANTS_TRANSFORM_AFFINE: return *_antsAffineNode;
+            case ANTS_TRANSFORM_RIGID: return *_antsRigidNode;
+            case ANTS_TRANSFORM_SYN: return *_antsSyNNode;
+        }
     }
 private:
     NODE_TYPE _type;
     string _displayName;
-    AbsNode baseNode;
+//    AbsNode baseNode;
 
     TestNode* _testNode = nullptr;
     AntsAffineRegistrationNode* _antsAffineNode = nullptr;

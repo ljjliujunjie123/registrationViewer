@@ -25,7 +25,7 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
     nodesScrollLayout->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     nodesScrollContainer->setLayout(nodesScrollLayout);
 
-    int menuHeight = 40;
+    int menuHeight = 50;
     auto nodeMenuLabel = new QLabel(nodesScrollContainer);
     nodeMenuLabel->setStyleSheet("border: none;");
     nodeMenuLabel->setText("Node Editor");
@@ -46,11 +46,10 @@ ProcessNodesContainer::ProcessNodesContainer(QWidget *parent) {
             [&](const QString& nodeString) -> void {
                 cout<< nodeString.toStdString() << endl;
                 auto nodeWrapperMap = nodeManger.getNodes();
-                auto nodeWrapper = new NodeWrapper(nodeWrapperMap.find(nodeString.toStdString())->second);
-                auto node = new TestNode("adsioc","dhcasiu");
-                NodeWrapper& newNodeWrapper = *new NodeWrapper(*node);
-                nodeManger.addShownNode(newNodeWrapper, nodeManger.getShownNodes().size());
-                const AbsNode& baseNode = newNodeWrapper.getBaseNode();
+                auto& nodeWrapper = *new NodeWrapper(nodeWrapperMap.find(nodeString.toStdString())->second);
+                auto node = nodeWrapper.getBaseNode();
+                nodeManger.addShownNode(nodeWrapper, nodeManger.getShownNodes().size());
+                const AbsNode& baseNode = nodeWrapper.getBaseNode();
                 auto nodeFrame = createNodeFactory(baseNode);
                 nodesScrollLayout->addWidget(nodeFrame);
             }
@@ -798,7 +797,7 @@ QVBoxLayout *ProcessNodesContainer::createNodeTail(AbsNode node, int height) {
     progressBar->setMinimum(0);
     progressBar->setMaximum(100);
     progressBar->setFixedHeight(height / 2);
-    progressBar->setValue(50);
+    progressBar->setValue(0);
     progressBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     progressBar->setTextVisible(false);
 
@@ -824,6 +823,11 @@ QVBoxLayout *ProcessNodesContainer::createNodeTail(AbsNode node, int height) {
     hLayout->addSpacerItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
     vLayout->addWidget(progressBar);
     vLayout->addLayout(hLayout);
+    node.addStartListener(
+            [&] () -> void {
+
+            }
+    );
     node.addProgressListener(
             [&] (int curValue) -> void {
                 progressBar->setValue(curValue);

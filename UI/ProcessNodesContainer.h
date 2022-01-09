@@ -29,7 +29,7 @@
 #include <QColor>
 
 class ProcessNodesContainer: public QFrame {
-
+Q_OBJECT
 public:
     ProcessNodesContainer(QWidget *parent = nullptr);
 
@@ -37,7 +37,7 @@ public:
         return saveDir;
     };
 
-signals:
+Q_SIGNALS:
     void startSignal();
 
 protected:
@@ -63,7 +63,7 @@ private:
 
     QFrame* createMultiControl(MultiTypeControl& multiTypeControl, QFrame& nodeContainer);
 
-    QLabel* createControlName(const QString& text, int height, bool isBold = false, int width = 150);
+    QLabel* createControlName(const QString& text, int height, bool isBold = false, int width = 220);
 
     QHBoxLayout* createNodeTitle(QFrame& nodeContainer, const QString& text, int height);
 

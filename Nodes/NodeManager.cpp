@@ -47,8 +47,8 @@ void NodeManager::removeShownNode(int index) {
     shownNodes.erase(it);
 }
 
-void NodeManager::executeCurrentNodes() {
-    DemoExecutor::executeNodes(getInstance().shownNodes);
+void NodeManager::executeCurrentNodes(function<void(string)> fileUpdateListener) {
+    DemoExecutor::executeNodes(getInstance().shownNodes, std::ref(fileUpdateListener));
 
 }
 

@@ -117,16 +117,16 @@ void ImageShownWidget::showRegistrationImage(string resPath) {
     vtkSmartPointer<vtkPiecewiseFunction> compositeOpacityRes = vtkSmartPointer<vtkPiecewiseFunction>::New();
     //Defines a piecewise function mapping.
     compositeOpacityRes->AddPoint(60, 0.00);
-    compositeOpacityRes->AddPoint(140, 0.40);
-    compositeOpacityRes->AddPoint(230, 0.60);
+    compositeOpacityRes->AddPoint(140, 0.10);
+    compositeOpacityRes->AddPoint(230, 0.20);
 
     volumePropertyRes->SetScalarOpacity(compositeOpacityRes);
 
     vtkSmartPointer<vtkColorTransferFunction> colorRes = vtkSmartPointer<vtkColorTransferFunction>::New();
     colorRes->AddRGBPoint(0, 0, 0, 0);
-    colorRes->AddRGBPoint(64, 1, 0.52, 0.30);
-    colorRes->AddRGBPoint(190.0, 1, 1, 1);
-    colorRes->AddRGBPoint(220, 0.2, 0.2, 0.2);
+    colorRes->AddRGBPoint(64, 1, 0.5, 0.2);
+    colorRes->AddRGBPoint(190.0, 1, 0.5, 0.2);
+    colorRes->AddRGBPoint(220, 1, 0.5, 0.2);
 
     volumePropertyRes->SetColor(colorRes);
 
@@ -167,16 +167,16 @@ void ImageShownWidget::showRegistrationImage(string resPath) {
     vtkSmartPointer<vtkPiecewiseFunction> compositeOpacityMov = vtkSmartPointer<vtkPiecewiseFunction>::New();
     //Defines a piecewise function mapping.
     compositeOpacityMov->AddPoint(60, 0.00);
-    compositeOpacityMov->AddPoint(140, 0.40);
-    compositeOpacityMov->AddPoint(230, 0.60);
+    compositeOpacityMov->AddPoint(140, 0.10);
+    compositeOpacityMov->AddPoint(230, 0.20);
 
     volumePropertyMov->SetScalarOpacity(compositeOpacityRes);
 
     vtkSmartPointer<vtkColorTransferFunction> colorMov = vtkSmartPointer<vtkColorTransferFunction>::New();
     colorMov->AddRGBPoint(0, 0, 0, 0);
-    colorMov->AddRGBPoint(64, 1, 0.52, 0.30);
-    colorMov->AddRGBPoint(190.0, 1, 1, 1);
-    colorMov->AddRGBPoint(220, 0.2, 0.2, 0.2);
+    colorMov->AddRGBPoint(64, 0.2, 0.5, 1);
+    colorMov->AddRGBPoint(190.0, 0.2, 0.5, 1);
+    colorMov->AddRGBPoint(220, 0.2, 0.5, 1);
 
     volumePropertyMov->SetColor(colorMov);
 

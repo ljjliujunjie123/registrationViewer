@@ -20,7 +20,7 @@ public:
         return instance;
     }
 
-    static void executeCurrentNodes();
+    static void executeCurrentNodes(function<void(string)> fileUpdateListener);
     //Actual functions:
 public:
     void registerNode(NodeWrapper node, const string& listItemDisplay);
